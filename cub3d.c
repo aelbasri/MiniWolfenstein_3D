@@ -186,17 +186,6 @@ t_ray    *ray_create(t_data *data, double angle)
     return (ray);
 }
 
-unsigned int    render_textures(t_data *data, double x, double y, double wall_width, double wall_height)
-{
-    unsigned int    color;
-
-    x = (data->text_x * x) / wall_width; 
-    y = (data->text_y * y) / wall_height; 
-
-    // printf("--->%f, %f\n", x, y);
-    return (*(unsigned int*)(data->walls[1].addr + ((int)y * data->walls[1].line_length + (int)x * (data->walls[1].bits_per_pixel / 8))));
-}
-
 void    one_wall_rendering(t_data *data, int j, t_ray *ray)
 {
 	double	distance;
@@ -214,11 +203,6 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
     y = 0;
 	distance = sqrt((pow((data->player->px - ray->x), 2) + pow((data->player->py - ray->y), 2))) * cos(data->player->angle - ray->angle);
 	wall_height = data->hi * 64 / distance;
-	// wall_width = data->wi * 64/ distance;
-	// if (wall_height >= data->hi)
-	// 	wall_height = data->hi;
-	// if (wall_width >= data->wi)
-	// 	wall_width = data->wi;
     a = (data->hi - wall_height) / 2;
 
     i = 0;
@@ -230,28 +214,29 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
         {
             if (ray->inter_d == VERTICAL)
             {
-                b = 1;
-                x = ((int)ray->y % 64);// + (ray->y - (int)ray->y);
+                if ((ray->angle >= 0 && ray->angle <= M_PI / 2) || (ray->angle >= 3 * M_PI / 2 &&  ray->angle <= 2 * M_PI))
+                    b = 2;
+                else
+                    b = 1;
+                x = ((int)ray->y % 64);
             }
             else
             {
-                b = 2;
-                x = ((int)ray->x % 64);// + (ray->x - (int)ray->x);
+                if (ray->angle >= 0 && ray->angle <= M_PI)
+                    b = 3;
+                else
+                    b = 0;
+                x = ((int)ray->x % 64);
             }
             y = i - a;
-			// // exit(0); 
-            // color = render_textures(data, x, y, wall_width, wall_height);
-            // // printf("++++%f, %f\n", x, y);
+
             color = *((unsigned int*)(data->walls[b].addr + ((int)((data->text_y * y) / wall_height) * data->walls[b].line_length + (int)((data->text_x * x) / 64) * (data->walls[b].bits_per_pixel / 8))));
             my_mlx_pixel_put(data->img, j, i, color);
         }
         else
             my_mlx_pixel_put(data->img, j, i, data->map->F);
         i++;
-    }
-    // if (j == data->wi / 2)
-	// 	exit(0);
-		
+    }	
 }
 
 
