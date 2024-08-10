@@ -295,6 +295,6 @@ int	ft_Read_Map(char *file, t_map *map)
 	}
 	map->map = ft_convertt(join, map);
 	count += ft_parse_map(map->map) + ft_jock(rd_file, 0);
-	count += 10;
+	// count += 10;
 	return (free(join), (count == 17) * 0 + (count != 17) * 1);
 }
