@@ -1,8 +1,8 @@
 
-SO ./1.xpm
-WE ./2.xpm
-EA ./3.xpm
-NO ./4.xpm
+SO ./assets/0.xpm
+WE ./assets/1.xpm
+EA ./assets/2.xpm
+NO ./assets/3.xpm
 
 
 F 255, 255,255

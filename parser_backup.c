@@ -167,13 +167,13 @@ int	ft_path(char *str, t_map *map)
 	if (!ss[1])
 		return (-20);
 	if (!strcmp(ss[0], "NO") && !ChPath(ss[1], ".xpm") && ++flag)
-		map->no = ft_strdup(ss[1]);
+		map->NO = ft_strdup(ss[1]);
 	else if (!strcmp(ss[0], "SO") && !ChPath(ss[1], ".xpm") && (flag += 2))
-		map->so = ft_strdup(ss[1]);
+		map->SO = ft_strdup(ss[1]);
 	else if (!strcmp(ss[0], "WE") && !ChPath(ss[1], ".xpm") && (flag += 3))
-		map->we = ft_strdup(ss[1]);
+		map->WE = ft_strdup(ss[1]);
 	else if (!strcmp(ss[0], "EA") && !ChPath(ss[1], ".xpm") && (flag += 4))
-		map->ea = ft_strdup(ss[1]);
+		map->EA = ft_strdup(ss[1]);
 	flag = flag + ft_jock(ss, 0);
 	return (flag);
 }

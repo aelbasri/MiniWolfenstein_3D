@@ -10,6 +10,9 @@
 # include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 
+# define VERTICAL 1
+# define HORIZONTAL 0
+
 # define W_KEY 119
 # define A_KEY 97
 # define S_KEY 115
@@ -31,9 +34,9 @@
 typedef struct s_img
 {
 	void	*img;
+	char	*addr;
 	int		endian;
     int		line_length;
-	char	*addr;
 	int		bits_per_pixel;
 } t_img;
 
@@ -41,6 +44,7 @@ typedef struct s_ray
 {
 	double	x;
 	double	y;
+	int		inter_d;
 	double	angle;
 	struct s_ray *next;
 } t_ray;
@@ -75,10 +79,10 @@ typedef struct s_map
 	int			x_win;
 	int			y_win;
 	char		**map;
-	char		*SO;
-	char		*EA;
-	char		*WE;
-	char		*NO;
+	char		*so;
+	char		*ea;
+	char		*we;
+	char		*no;
 
 }				t_map;
 
@@ -94,6 +98,9 @@ typedef struct s_data
 	void    *mlx;
     void    *win;
 	int     fd;
+	int		text_y;
+	int		text_x;
+	t_img	walls[4];
 	t_ray	*ray;
 	t_map	*map;
 	t_img	*img;

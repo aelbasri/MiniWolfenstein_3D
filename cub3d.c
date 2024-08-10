@@ -123,24 +123,24 @@ t_ray    *ray_create(t_data *data, double angle)
     {
         j = 1;
         i = 0;
-        y_init = ((int)(data->player->py / 16.0)) + 1;
+        y_init = ((int)(data->player->py / 64.0)) + 1;
         y_max = ((int)(data->column_len));
     }
     else
     {
-        y_init = ((int)(data->player->py / 16.0));
+        y_init = ((int)(data->player->py / 64.0));
         y_max = 0;
         j = -1;
         i = -1;
     }
     while (y_max - (j * y_init) >= 0)
 	{
-		ray->x = data->player->px + ((((double)(y_init * 16)) - data->player->py) / tan(angle));
+		ray->x = data->player->px + ((((double)(y_init * 64)) - data->player->py) / tan(angle));
         if (ray->x < 0)
             ray->x = 0;
-        if (ray->x > (data->row_len - 1) * 16)
-            ray->x = (data->row_len - 1) * 16;
-		if (y_init + i >= data->column_len || data->map->map[y_init + i][(int)ray->x / 16] == '1')
+        if (ray->x > (data->row_len - 1) * 64)
+            ray->x = (data->row_len - 1) * 64;
+		if (y_init + i >= data->column_len || data->map->map[y_init + i][(int)ray->x / 64] == '1')
 			break;
         y_init += j; 
     }
@@ -148,48 +148,69 @@ t_ray    *ray_create(t_data *data, double angle)
     {
         j = 1;
         i = 0;
-        x_init = ((int)(data->player->px / 16.0)) + 1;
+        x_init = ((int)(data->player->px / 64.0)) + 1;
         x_max = (int)(data->row_len);
     }
     else
     {
-        x_init = ((int)(data->player->px / 16.0));
+        x_init = ((int)(data->player->px / 64.0));
         x_max = 0;
         j = -1;
         i = -1;
     }
 	while (x_max - (x_init * j) >= 0)
 	{
-		ray->y = data->player->py + ((((double)(x_init * 16)) - data->player->px) * tan(angle));
+		ray->y = data->player->py + ((((double)(x_init * 64)) - data->player->px) * tan(angle));
         if (ray->y < 0)
             ray->y = 0;
-        if (ray->y > (data->column_len - 1) * 16)
-            ray->y = (data->column_len - 1) * 16;
-        if (x_init + i >= data->row_len || data->map->map[(int)ray->y / 16][x_init + i] == '1')
+        if (ray->y > (data->column_len - 1) * 64)
+            ray->y = (data->column_len - 1) * 64;
+        if (x_init + i >= data->row_len || data->map->map[(int)ray->y / 64][x_init + i] == '1')
 			break;
         x_init += j;
 	}
     /* √((x1 - x)² + (y1 - y)²) < √((x1 - x)² + (y1 - y)²) */
-	if (sqrt((pow(ray->x - data->player->px, 2) + pow((double)(y_init * 16.0) - data->player->py, 2))) <
-		sqrt((pow(data->player->px - (double)(x_init * 16.0), 2) + pow(data->player->py - ray->y, 2))))
-    	ray->y = (double)(y_init * 16.0);
+	if (sqrt((pow(ray->x - data->player->px, 2) + pow((double)(y_init * 64.0) - data->player->py, 2))) <
+		sqrt((pow(data->player->px - (double)(x_init * 64.0), 2) + pow(data->player->py - ray->y, 2))))
+    {
+        ray->inter_d = VERTICAL;
+        ray->y = (double)(y_init * 64.0);
+    }
     else
-		ray->x = (double)(x_init * 16.0);
+	{
+        ray->inter_d = HORIZONTAL;
+    	ray->x = (double)(x_init * 64.0);
+    }
     ray->angle = angle;
     ray->next = NULL;
     return (ray);
+}
+
+void    render_textures(t_data *data, double x, double y, double wall_width, double wall_height)
+{
+    int xx;
+    int yy;
+
+    xx = (data->text_x * x) / wall_width; 
+    yy = (data->text_y * y) / wall_height; 
 }
 
 void    one_wall_rendering(t_data *data, int j, t_ray *ray)
 {
 	double	distance;
     double  wall_height;
+    double  wall_width;
     double  a;
+    double  x;
+    double  y;
     int     i;
 	
     i = 0;
-	distance = sqrt((pow(data->player->px - ray->x, 2) + pow(data->player->py - ray->y, 2))) * cos(data->player->angle - ray->angle);
-    wall_height =(data->hi * 16) / distance;
+    x = 0;
+    y = 0;
+	distance = sqrt((pow((data->player->px - ray->x), 2) + pow((data->player->py - ray->y), 2))) * cos(data->player->angle - ray->angle);
+    wall_height = data->hi / (distance / 64);
+    wall_width = data->wi / (distance / 64);
     a = (data->hi - wall_height) / 2;
         i = 0;
         while (i <= data->hi)
@@ -197,12 +218,22 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
             if (i >= 0 && i <= a)
                 my_mlx_pixel_put(data->img, j, i, data->map->C);
             else if (i > a && i <= a + wall_height)
+            {
+                // y = i - a;
+                // if (ray->inter_d == VERTICAL)
+                //     x = ray->y - (int)ray->y;
+                // else
+                //     x = ray->x - (int)ray->x;
+                // x = (x * 64) / wall_width;
+                // render_textures(data, x, y, wall_width, wall_height);
                 my_mlx_pixel_put(data->img, j, i, 0x00000000);
+            }
             else
                 my_mlx_pixel_put(data->img, j, i, data->map->F);
             i++;
         }
 }
+
 
 void    render_walls(t_data *data)
 {
@@ -257,7 +288,7 @@ void player_movement(t_data *data)
     normalize(&(data->player->angle));
 	y = data->player->py + (sin(data->player->angle) * (data->player->walk_dir));
 	x = data->player->px + (cos(data->player->angle) * (data->player->walk_dir));
-	if (data->map->map[(int)(y / 16.0)][(int)(x / 16.0)] != '1')
+	if (data->map->map[(int)(y / 64.0)][(int)(x / 64.0)] != '1')
     {
 		data->player->py += sin(data->player->angle) * (data->player->walk_dir);
 		data->player->px += cos(data->player->angle) * (data->player->walk_dir);
@@ -270,8 +301,8 @@ int	init_player(t_data *data, double angle, int x, int y)
 	data->player->angle = angle;
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
-	data->player->px = x + 8;
-	data->player->py = y + 8;
+	data->player->px = x + 32;
+	data->player->py = y + 32;
     data->player->p_speed = 3;
 	return (0);
 }
@@ -294,10 +325,28 @@ void    mini_map(t_data *data)
         }
         j++;
     }
-    put_square(data, data->player->px - 2.0, data->player->py - 2.0, 4.0, 0xFF00000);
-    line(data, 16, 0xFF00000);
-    // draw_rays(data);
+    // put_square(data, data->player->px - 2.0, data->player->py - 2.0, 4.0, 0xFF00000);
+    // line(data, 16, 0xFF00000);
+    /* draw_rays(data); */
 }
+
+void    setup_testures(t_data *data)
+{
+    data->text_x = 0;
+    data->text_y = 0;
+
+    data->walls[0].img = mlx_xpm_file_to_image(data->mlx, data->map->so, &(data->text_x), &(data->text_y));
+    data->walls[1].img = mlx_xpm_file_to_image(data->mlx, data->map->we, &(data->text_x), &(data->text_y));
+    data->walls[2].img = mlx_xpm_file_to_image(data->mlx, data->map->ea, &(data->text_x), &(data->text_y));
+    data->walls[3].img = mlx_xpm_file_to_image(data->mlx, data->map->no, &(data->text_x), &(data->text_y));
+
+    if (!(data->walls[0].img) || !(data->walls[1].img) || !(data->walls[2].img) || !(data->walls[3].img))
+    {
+        printf("Error: assets\n");
+		exit(2);
+    }
+}
+
 
 int draw_map(t_data *data)
 {
@@ -308,13 +357,13 @@ int draw_map(t_data *data)
     data->img->img = mlx_new_image(data->mlx, data->wi, data->hi);
     data->img->addr = mlx_get_data_addr(data->img->img, &(data->img->bits_per_pixel), &(data->img->line_length), &(data->img->endian));
     if (data->flag == 0)
-        init_player(data, E, (data->map->x - 1) * 16, (data->map->y - 1) * 16);
+        init_player(data, E, (data->map->x - 1) * 64, (data->map->y - 1) * 64);
     data->flag = 1;
     player_movement(data);
     ray_casting(data);
     render_walls(data);
-    mini_map(data);
-    // draw_rays(data);
+    // mini_map(data);
+    /* draw_rays(data); */
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
     data->player->walk_dir = 0;
     data->player->turn_dir = 0;
@@ -338,7 +387,7 @@ int update_player(int key_code, t_data *data)
         data->player->walk_dir = 1;
     // else if (key_code == D_KEY)
     // {
-    //     if (data->player->px < (data->row_len * 16) - 16)
+    //     if (data->player->px < (data->row_len * 64) - 64)
     //         data->player->px += 1;
     // }
     else if (key_code == ESC_KEY)
@@ -364,11 +413,12 @@ int main(int ac, char **av)
     data.row_len = 0;
     data.column_len = 0;
     data.map = malloc(sizeof(t_map));
-    if (ac != 2 || ft_Read_Map(av[1], data.map))
-	{
-		printf("Error\n");
-		return (2);
-	}
+    ft_Read_Map(av[1], data.map);
+    // if (ac != 2 || ft_Read_Map(av[1], data.map))
+	// {
+	// 	printf("Error\n");
+	// 	return (2);
+	// }
     data.row_len = data.map->x_win;
     data.column_len = data.map->y_win;
     data.wi = 1160;
@@ -378,6 +428,7 @@ int main(int ac, char **av)
     data.img = malloc(sizeof(t_img));
     data.img->img = mlx_new_image(data.mlx, data.wi, data.hi);
     data.img->addr = mlx_get_data_addr(data.img->img, &(data.img->bits_per_pixel), &(data.img->line_length), &(data.img->endian));
+    setup_testures(&data);
 	mlx_hook(data.win, 2, 1L<<0, &update_player, &data);
     mlx_loop_hook(data.mlx, draw_map , &data);
     mlx_loop(data.mlx);
