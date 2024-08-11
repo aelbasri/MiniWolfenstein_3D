@@ -186,6 +186,7 @@ t_ray    *ray_create(t_data *data, double angle)
     return (ray);
 }
 
+
 void    one_wall_rendering(t_data *data, int j, t_ray *ray)
 {
 	double	distance;
@@ -236,7 +237,10 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
         else
             my_mlx_pixel_put(data->img, j, i, data->map->F);
         i++;
-    }	
+    }
+    // if (j == data->wi / 2)
+	// 	exit(0);
+		
 }
 
 
@@ -289,15 +293,23 @@ void player_movement(t_data *data)
     double	x;
     double	y;
 
-
     normalize(&(data->player->angle));
-	y = data->player->py + (sin(data->player->angle) * (data->player->walk_dir)) * data->player->p_speed;
-	x = data->player->px + (cos(data->player->angle) * (data->player->walk_dir)) * data->player->p_speed;
+	y = data->player->py + (3 *sin(data->player->angle) * (data->player->walk_dir) * data->player->p_speed);
+	x = data->player->px + (3 *cos(data->player->angle) * (data->player->walk_dir) * data->player->p_speed);
 	if (data->map->map[(int)(y / 64.0)][(int)(x / 64.0)] != '1')
     {
 		data->player->py += sin(data->player->angle) * (data->player->walk_dir) * data->player->p_speed;
 		data->player->px += cos(data->player->angle) * (data->player->walk_dir) * data->player->p_speed;
     }
+    else
+    {
+        y = data->player->py + (3 * sin(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2));
+        if (data->map->map[(int)(y / 64.0)][(int)(data->player->px / 64.0)] != '1')
+            data->player->py += sin(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2);
+        x = data->player->px + (3 * cos(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2));
+        if (data->map->map[(int)(data->player->py / 64.0)][(int)(x / 64.0)] != '1')
+            data->player->px += cos(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2);
+	}
 }
 
 int	init_player(t_data *data, double angle, int x, int y)
@@ -308,7 +320,7 @@ int	init_player(t_data *data, double angle, int x, int y)
 	data->player->turn_dir = 0;
 	data->player->px = x + 32;
 	data->player->py = y + 32;
-    data->player->p_speed = 3;
+    data->player->p_speed = 6;
 	return (0);
 }
 
