@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelbassat <abdelbassat@student.42.fr>    #+#  +:+       +#+        */
+/*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-07-27 09:39:22 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024-07-27 09:39:22 by abdelbassat      ###   ########.fr       */
+/*   Created: 2024/07/27 09:39:22 by abdelbassat       #+#    #+#             */
+/*   Updated: 2024/08/11 16:51:00 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ int	ChPath(char *file, char *ex)
 	int	res;
 
 	res = -2;
-	if (!strcmp(ft_strrchr(file, '.'), ex) && (fd = open(file, O_RDONLY)))
+	if (!strcmp(ft_strrchr(file, '.'), ex))
+	{
+		fd = open(file, O_RDONLY);
 		res = ((fd < 0) * fd + !(fd < 0) * 0);
+	}
 	return (res);
 }
 
@@ -168,12 +171,21 @@ int	ft_path(char *str, t_map *map)
 		return (-20);
 	if (!strcmp(ss[0], "NO") && !ChPath(ss[1], ".xpm") && ++flag)
 		map->no = ft_strdup(ss[1]);
-	else if (!strcmp(ss[0], "SO") && !ChPath(ss[1], ".xpm") && (flag += 2))
+	else if (!strcmp(ss[0], "SO") && !ChPath(ss[1], ".xpm"))
+	{
+		flag += 2;
 		map->so = ft_strdup(ss[1]);
-	else if (!strcmp(ss[0], "WE") && !ChPath(ss[1], ".xpm") && (flag += 3))
+	}
+	else if (!strcmp(ss[0], "WE") && !ChPath(ss[1], ".xpm"))
+	{
+		flag += 3;
 		map->we = ft_strdup(ss[1]);
-	else if (!strcmp(ss[0], "EA") && !ChPath(ss[1], ".xpm") && (flag += 4))
+	}
+	else if (!strcmp(ss[0], "EA") && !ChPath(ss[1], ".xpm"))
+	{
+		flag += 4;
 		map->ea = ft_strdup(ss[1]);
+	}
 	flag = flag + ft_jock(ss, 0);
 	return (flag);
 }
@@ -230,8 +242,12 @@ void	ft_pos(char *str, t_map *map, int j)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_strchr("NOSE", str[i]) && (map->x = i + 1) && (map->y = j + 1))
+		if (ft_strchr("NOSE", str[i]))
+		{
+			map->x = i + 1;
+			map->y = j + 1;
 			break ;
+		}
 		i++;
 	}
 }
@@ -295,6 +311,5 @@ int	ft_Read_Map(char *file, t_map *map)
 	}
 	map->map = ft_convertt(join, map);
 	count += ft_parse_map(map->map) + ft_jock(rd_file, 0);
-	// count += 10;
 	return (free(join), (count == 17) * 0 + (count != 17) * 1);
 }
