@@ -78,6 +78,7 @@ typedef struct s_map
 	int			y;
 	int			x_win;
 	int			y_win;
+	char p;
 	char		**map;
 	char		*so;
 	char		*ea;

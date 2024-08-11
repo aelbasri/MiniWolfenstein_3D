@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 09:39:22 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024/08/11 16:51:00 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:53:56 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ void	ft_pos(char *str, t_map *map, int j)
 		{
 			map->x = i + 1;
 			map->y = j + 1;
+			map->p = str[i];
 			break ;
 		}
 		i++;
