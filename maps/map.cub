@@ -1,13 +1,13 @@
 
-SO ./assets/0.xpm
-WE ./assets/1.xpm
-EA ./assets/2.xpm
-NO ./assets/3.xpm
+SO ./assets/nether_minecraft.xpm
+WE ./assets/nether_minecraft.xpm
+EA ./assets/333.xpm
+NO ./assets/55.xpm
 
 
 F 255, 255,255
   
-C 200,  100, 32 
+C  47, 213, 254 
 
 111111111111111
 100000001100001
