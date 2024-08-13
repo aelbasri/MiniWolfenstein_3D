@@ -23,6 +23,7 @@
 # define LF_KEY 65361
 # define RT_KEY 65363
 # define ESC_KEY 65307
+# define T_SIZE 32
 
 #define M_PI 3.14159265358979323846
 #define F_VIEW M_PI / 3
@@ -96,6 +97,9 @@ typedef struct s_data
 	int		column_len;
 	int		wi;
 	int		hi;
+	double	xx;
+	double	yy;
+	double	zz;
 	void    *mlx;
     void    *win;
 	int     fd;

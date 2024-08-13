@@ -33,30 +33,30 @@ void put_square(t_data *data, int x, int y, int size, int color)
     }
 }
 
-void line(t_data *data, double len, int color)
-{
-    double steps;
-    double x = data->player->px;
-    double y = data->player->py;
-    double i = 0;
-    t_line  line;
+// void line(t_data *data, double len, int color)
+// {
+//     double steps;
+//     double x = data->player->px;
+//     double y = data->player->py;
+//     double i = 0;
+//     t_line  line;
 
-    line.x2 = (data->player->px) + (len * cos(data->player->angle));  
-    line.y2 = (data->player->py) + (len * sin(data->player->angle));  
-    line.xs = line.x2 - data->player->px;
-    line.ys = line.y2 - data->player->py;
-    steps = fmax(fabs(line.xs),fabs(line.ys));
-    line.xi = line.xs / steps;
-    line.yi = line.ys / steps;
+//     line.x2 = (data->player->px) + (len * cos(data->player->angle));  
+//     line.y2 = (data->player->py) + (len * sin(data->player->angle));  
+//     line.xs = line.x2 - data->player->px;
+//     line.ys = line.y2 - data->player->py;
+//     steps = fmax(fabs(line.xs),fabs(line.ys));
+//     line.xi = line.xs / steps;
+//     line.yi = line.ys / steps;
 
-    while (i <= steps && (x >= 0 && x < data->row_len * 16) && ((y >= 0 && y < data->column_len * 16)))
-    {
-		my_mlx_pixel_put(data->img, x, y, color);
-        x = x + line.xi;
-        y = y + line.yi;
-        i++;
-    }
-}
+//     while (i <= steps && (x >= 0 && x < data->row_len * 16) && ((y >= 0 && y < data->column_len * 16)))
+//     {
+// 		my_mlx_pixel_put(data->img, x, y, color);
+//         x = x + line.xi;
+//         y = y + line.yi;
+//         i++;
+//     }
+// }
 
 void normalize(double *angle)
 {
@@ -65,45 +65,45 @@ void normalize(double *angle)
         *angle += 2 * M_PI;
 }
 
-void line_2(t_data *data, double xx, double yy, int color, double angle)
-{
+// void line_2(t_data *data, double xx, double yy, int color, double angle)
+// {
 
-    double steps;
-    double len = sqrt((pow(data->player->px - xx, 2) + pow(data->player->py - yy, 2)));
-    double x = data->player->px;
-    double y = data->player->py;
-    double i = 0;
-    t_line  line;
+//     double steps;
+//     double len = sqrt((pow(data->player->px - xx, 2) + pow(data->player->py - yy, 2)));
+//     double x = data->player->px;
+//     double y = data->player->py;
+//     double i = 0;
+//     t_line  line;
 
-    line.x2 = (data->player->px) + (len * cos(angle));  
-    line.y2 = (data->player->py) + (len * sin(angle));  
-    line.xs = line.x2 - data->player->px;
-    line.ys = line.y2 - data->player->py;
-    steps = fmax(fabs(line.xs),fabs(line.ys));
-    line.xi = line.xs / steps;
-    line.yi = line.ys / steps;
+//     line.x2 = (data->player->px) + (len * cos(angle));  
+//     line.y2 = (data->player->py) + (len * sin(angle));  
+//     line.xs = line.x2 - data->player->px;
+//     line.ys = line.y2 - data->player->py;
+//     steps = fmax(fabs(line.xs),fabs(line.ys));
+//     line.xi = line.xs / steps;
+//     line.yi = line.ys / steps;
 
-    while (i <= steps && (x >= 0 && x < data->row_len * 16) && ((y >= 0 && y < data->column_len * 16)))
-    {
-		my_mlx_pixel_put(data->img, x, y, color);
-        x = x + line.xi;
-        y = y + line.yi;
-        i++;
-    }
-}
+//     while (i <= steps && (x >= 0 && x < data->row_len * 16) && ((y >= 0 && y < data->column_len * 16)))
+//     {
+// 		my_mlx_pixel_put(data->img, x, y, color);
+//         x = x + line.xi;
+//         y = y + line.yi;
+//         i++;
+//     }
+// }
 
-void    draw_rays(t_data *data)
-{
-    t_ray *tmp;
-    int i = 0;
+// void    draw_rays(t_data *data)
+// {
+//     t_ray *tmp;
+//     int i = 0;
 
-    tmp = data->ray;
-    while (tmp != NULL)
-    {
-        line_2(data, tmp->x, tmp->y, 0xFF00000, tmp->angle);
-        tmp = tmp->next;
-    }
-}
+//     tmp = data->ray;
+//     while (tmp != NULL)
+//     {
+//         line_2(data, tmp->x, tmp->y, 0xFF00000, tmp->angle);
+//         tmp = tmp->next;
+//     }
+// }
 
 
 
@@ -123,24 +123,24 @@ t_ray    *ray_create(t_data *data, double angle)
     {
         j = 1;
         i = 0;
-        y_init = ((int)(data->player->py / 32.0)) + 1;
+        y_init = ((int)(data->player->py / T_SIZE)) + 1;
         y_max = ((int)(data->column_len));
     }
     else
     {
-        y_init = ((int)(data->player->py / 32.0));
+        y_init = ((int)(data->player->py / T_SIZE));
         y_max = 0;
         j = -1;
         i = -1;
     }
     while (y_max - (j * y_init) >= 0)
 	{
-		ray->x = data->player->px + ((((double)(y_init * 32)) - data->player->py) / tan(angle));
+		ray->x = data->player->px + ((((double)(y_init * T_SIZE)) - data->player->py) / tan(angle));
         if (ray->x < 0)
             ray->x = 0;
-        if (ray->x > (data->row_len - 1) * 32)
-            ray->x = (data->row_len - 1) * 32;
-		if (y_init + i >= data->column_len || data->map->map[y_init + i][(int)ray->x / 32] == '1')
+        if (ray->x > (data->row_len - 1) * T_SIZE)
+            ray->x = (data->row_len - 1) * T_SIZE;
+		if (y_init + i >= data->column_len || data->map->map[y_init + i][(int)ray->x / T_SIZE] == '1')
 			break;
         y_init += j; 
     }
@@ -148,38 +148,38 @@ t_ray    *ray_create(t_data *data, double angle)
     {
         j = 1;
         i = 0;
-        x_init = ((int)(data->player->px / 32.0)) + 1;
+        x_init = ((int)(data->player->px / T_SIZE)) + 1;
         x_max = (int)(data->row_len);
     }
     else
     {
-        x_init = ((int)(data->player->px / 32.0));
+        x_init = ((int)(data->player->px / T_SIZE));
         x_max = 0;
         j = -1;
         i = -1;
     }
 	while (x_max - (x_init * j) >= 0)
 	{
-		ray->y = data->player->py + ((((double)(x_init * 32)) - data->player->px) * tan(angle));
+		ray->y = data->player->py + ((((double)(x_init * T_SIZE)) - data->player->px) * tan(angle));
         if (ray->y < 0)
             ray->y = 0;
-        if (ray->y > (data->column_len - 1) * 32)
-            ray->y = (data->column_len - 1) * 32;
-        if (x_init + i >= data->row_len || data->map->map[(int)ray->y / 32][x_init + i] == '1')
+        if (ray->y > (data->column_len - 1) * T_SIZE)
+            ray->y = (data->column_len - 1) * T_SIZE;
+        if (x_init + i >= data->row_len || data->map->map[(int)ray->y / T_SIZE][x_init + i] == '1')
 			break;
         x_init += j;
 	}
     /* √((x1 - x)² + (y1 - y)²) < √((x1 - x)² + (y1 - y)²) */
-	if (sqrt((pow(ray->x - data->player->px, 2) + pow((double)(y_init * 32.0) - data->player->py, 2))) <
-		sqrt((pow(data->player->px - (double)(x_init * 32.0), 2) + pow(data->player->py - ray->y, 2))))
+	if (sqrt((pow(ray->x - data->player->px, 2) + pow((double)(y_init * T_SIZE) - data->player->py, 2))) <
+		sqrt((pow(data->player->px - (double)(x_init * T_SIZE), 2) + pow(data->player->py - ray->y, 2))))
     {
         ray->inter_d = HORIZONTAL;
-        ray->y = (double)(y_init * 32.0);
+        ray->y = (double)(y_init * T_SIZE);
     }
     else
 	{
         ray->inter_d = VERTICAL;
-    	ray->x = (double)(x_init * 32.0);
+    	ray->x = (double)(x_init * T_SIZE);
     }
     ray->angle = angle;
     ray->next = NULL;
@@ -203,7 +203,7 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
     x = 0;
     y = 0;
 	distance = sqrt((pow((data->player->px - ray->x), 2) + pow((data->player->py - ray->y), 2))) * cos(data->player->angle - ray->angle);
-	wall_height = data->hi * 32 / distance;
+	wall_height = data->hi * T_SIZE / distance;
     a = (data->hi - wall_height) / 2;
 
     i = 0;
@@ -219,7 +219,7 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
                     b = 2;
                 else
                     b = 1;
-                x = (fmod(ray->y , 32));
+                x = (fmod(ray->y , T_SIZE));
             }
             else
             {
@@ -227,10 +227,10 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
                     b = 3;
                 else
                     b = 0;
-                x = fmod(ray->x , 32);
+                x = fmod(ray->x , T_SIZE);
             }
             y = i - a;
-            color = *((unsigned int*)(data->walls[b].addr + ((int)((data->text_y * y) / wall_height) * data->walls[b].line_length + (int)((data->text_x * x) / 32) * (data->walls[b].bits_per_pixel / 8))));
+            color = *((unsigned int*)(data->walls[b].addr + ((int)((data->text_y * y) / wall_height) * data->walls[b].line_length + (int)((data->text_x * x) / T_SIZE) * (data->walls[b].bits_per_pixel / 8))));
             my_mlx_pixel_put(data->img, j, i, color);
         }
         else
@@ -287,28 +287,61 @@ void	ray_casting(t_data *data)
 		data->player->angle = tmp;
 }
 
-void player_movement(t_data *data)
+int    check_and_move(t_data *data, double angle)
 {
     double	x;
     double	y;
 
+    y = data->player->py + (3 * sin(angle));
+	x = data->player->px + (3 * cos(angle));
+    if (data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '1')
+        return (1);
+    return (0);
+}
+
+void player_movement(t_data *data)
+{
+    double	x;
+    double	y;
+    double  angle;
+    int     flag;
+    int     i = 0;
+
     normalize(&(data->player->angle));
-	y = data->player->py + (3 *sin(data->player->angle) * (data->player->walk_dir) * data->player->p_speed);
-	x = data->player->px + (3 *cos(data->player->angle) * (data->player->walk_dir) * data->player->p_speed);
-	if (data->map->map[(int)(y / 32.0)][(int)(x / 32.0)] != '1')
+    // if (check_and_move(data, data->player->angle - (15 * M_PI / 180)) == 0 &&\
+    // check_and_move(data, data->player->angle + (15 * M_PI / 180)) == 0)
+    // {
+    //     printf("hello\n");
+    //     return ;
+    // }
+    
+	y = data->player->py + (3 * sin(data->player->angle) * (data->player->walk_dir));
+	x = data->player->px + (3 * cos(data->player->angle) * (data->player->walk_dir));
+    angle = data->player->angle;
+    while(i < 8)
     {
-		data->player->py += sin(data->player->angle) * (data->player->walk_dir) * data->player->p_speed;
-		data->player->px += cos(data->player->angle) * (data->player->walk_dir) * data->player->p_speed;
+        flag = check_and_move(data, angle);
+        if (flag == 0)
+            break;
+        angle += 45 * M_PI / 180;
+        i++;
+    }
+
+    if (flag != 0 && data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '1')
+    {
+        data->player->px = x;
+        data->player->py = y;
     }
     else
     {
-        y = data->player->py + (3 * sin(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2));
-        if (data->map->map[(int)(y / 32.0)][(int)(data->player->px / 32.0)] != '1')
-            data->player->py += sin(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2);
-        x = data->player->px + (3 * cos(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2));
-        if (data->map->map[(int)(data->player->py / 32.0)][(int)(x / 32.0)] != '1')
-            data->player->px += cos(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2);
+        y = data->player->py + (sin(data->player->angle) * (data->player->walk_dir));
+        x = data->player->px + (cos(data->player->angle) * (data->player->walk_dir));
+        if (data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '1')
+            data->player->py = y;
+        if (data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '1')
+            data->player->px = x;
 	}
+	
 }
 
 int	init_player(t_data *data, double angle, int x, int y)
@@ -317,9 +350,9 @@ int	init_player(t_data *data, double angle, int x, int y)
 	data->player->angle = angle;
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
-	data->player->px = x + 16;
-	data->player->py = y + 16;
-    data->player->p_speed = 10;
+	data->player->px = x + (T_SIZE / 2);
+	data->player->py = y + (T_SIZE / 2);
+    data->player->p_speed = 4;
 	return (0);
 }
 
@@ -380,7 +413,7 @@ int draw_map(t_data *data)
     data->img->img = mlx_new_image(data->mlx, data->wi, data->hi);
     data->img->addr = mlx_get_data_addr(data->img->img, &(data->img->bits_per_pixel), &(data->img->line_length), &(data->img->endian));
     if (data->flag == 0)
-        init_player(data, E, (data->map->x - 1) * 32, (data->map->y - 1) * 32);
+        init_player(data, E, (data->map->x - 1) * T_SIZE, (data->map->y - 1) * T_SIZE);
     data->flag = 1;
     player_movement(data);
     ray_casting(data);
@@ -399,16 +432,16 @@ int update_player(int key_code, t_data *data)
     int		y;
 
 	if (key_code == LF_KEY)
-		data->player->angle = data->player->angle - (2 * (M_PI / 180));
+		data->player->angle = data->player->angle - (4 * (M_PI / 180));
     else if (key_code == RT_KEY)
-		data->player->angle = data->player->angle + (2 * (M_PI / 180));
+		data->player->angle = data->player->angle + (4 * (M_PI / 180));
     else if (key_code == S_KEY)
         data->player->walk_dir = -1;
     else if (key_code == A_KEY)
     {
         // x = data->player->px + (6 * cos(data->player->angle - (M_PI / 2)));
         // y = data->player->py + (6 * sin(data->player->angle - (M_PI / 2)));
-        // if (data->map->map[(int)(y / 32.0)][(int)(x / 32.0)] != '1')
+        // if (data->map->map[(int)(y / T_SIZE.0)][(int)(x / T_SIZE.0)] != '1')
         // {
         //     data->player->py += (6 *sin(data->player->angle - (M_PI / 2)));
         //     data->player->px += (6 *cos(data->player->angle - (M_PI / 2)));
@@ -420,7 +453,7 @@ int update_player(int key_code, t_data *data)
     {
         // y = data->player->py + (6 * sin(data->player->angle + (M_PI / 2)));
         // x = data->player->px + (6 * cos(data->player->angle + (M_PI / 2)));
-        // if (data->map->map[(int)(y / 32.0)][(int)(x / 32.0)] != '1')
+        // if (data->map->map[(int)(y / T_SIZE.0)][(int)(x / T_SIZE.0)] != '1')
         // {
         //     data->player->py += (6 * sin(data->player->angle + (M_PI / 2)));
         //     data->player->px += (6 *cos(data->player->angle + (M_PI / 2)));
