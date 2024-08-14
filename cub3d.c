@@ -344,6 +344,58 @@ int	init_player(t_data *data, double angle, int x, int y)
 	return (0);
 }
 
+// abdelbassat
+
+
+void    mini_map(t_data *data)
+{
+	int		i = 0;
+    int     j = 0;
+    // abdo
+    double x = (data->player->px) / S_WALL ; 
+    double y = (data->player->py)  / S_WALL ;
+    int color = 0;
+    int flag = 0;
+
+    i = ((x - 10) < 0) * 0 + !((x - 10) < 0) * (x - 10);
+    j = ((y - 4) < 0) * 0 + !((y - 4) < 0) * (y - 4);
+    printf(" x == %d   y  == %d\n" , i , j);
+    int k = 0;
+    int u = 0;
+	while(u < 8  )
+	{
+     k = 0;
+        while( k < 20)
+        {
+            printf("%d   %d -------\n" , j + u , i + k);
+            if(!flag && (!data->map->map[j + u ] || !data->map->map[j + u ][i + k]))
+                flag = 1;
+            
+            if (!flag  && data->map->map[j + u][i + k] == '1')
+                color = 8612715;
+            else 
+                color = (flag) * 35 + !(flag) * 458751 ;
+              put_square(data, k * 20, u * 20, 20, color);
+            k++;
+        }
+        if(data->map->map[j + u ])
+             flag = 0;
+        u++;
+    }
+    put_square(data, x * 20, y * 20, 8, 11);
+
+    // abdelbassat
+    // draw player
+    // put_square(data, x * 16, y * 16 , 5, 16777215);
+    // put_square(data, x1 * 16, y1 * 16 , 5, 16777215);
+    // abdelbassat
+    // put_square(data, data->player->px - 2.0, data->player->py - 2.0, 4.0, 0xFF00000);
+    // line(data, 16, 0xFF00000);
+    /* draw_rays(data); */
+}
+
+// abdelbassat 
+
 // void    mini_map(t_data *data)
 // {
 // 	int		i = 0;
