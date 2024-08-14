@@ -97,9 +97,6 @@ typedef struct s_data
 	int		column_len;
 	int		wi;
 	int		hi;
-	double	xx;
-	double	yy;
-	double	zz;
 	void    *mlx;
     void    *win;
 	int     fd;

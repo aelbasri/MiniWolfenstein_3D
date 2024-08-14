@@ -140,7 +140,8 @@ t_ray    *ray_create(t_data *data, double angle)
             ray->x = 0;
         if (ray->x > (data->row_len - 1) * T_SIZE)
             ray->x = (data->row_len - 1) * T_SIZE;
-		if (y_init + i >= data->column_len || data->map->map[y_init + i][(int)ray->x / T_SIZE] == '1')
+        printf("y = %d, x = %d\n" ,(y_init + i),(int)ray->x / T_SIZE);
+		if (y_init + i < 0 || y_init + i >= data->column_len || data->map->map[y_init + i][(int)ray->x / T_SIZE] == '1')
 			break;
         y_init += j; 
     }
@@ -165,7 +166,7 @@ t_ray    *ray_create(t_data *data, double angle)
             ray->y = 0;
         if (ray->y > (data->column_len - 1) * T_SIZE)
             ray->y = (data->column_len - 1) * T_SIZE;
-        if (x_init + i >= data->row_len || data->map->map[(int)ray->y / T_SIZE][x_init + i] == '1')
+        if (x_init + i < 0 || x_init + i >= data->row_len || data->map->map[(int)ray->y / T_SIZE][x_init + i] == '1')
 			break;
         x_init += j;
 	}
@@ -205,7 +206,6 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
 	distance = sqrt((pow((data->player->px - ray->x), 2) + pow((data->player->py - ray->y), 2))) * cos(data->player->angle - ray->angle);
 	wall_height = data->hi * T_SIZE / distance;
     a = (data->hi - wall_height) / 2;
-
     i = 0;
     while (i <= data->hi)
     {
@@ -236,10 +236,7 @@ void    one_wall_rendering(t_data *data, int j, t_ray *ray)
         else
             my_mlx_pixel_put(data->img, j, i, data->map->F);
         i++;
-    }
-    // if (j == data->wi / 2)
-	// 	exit(0);
-		
+    }	
 }
 
 
@@ -308,15 +305,8 @@ void player_movement(t_data *data)
     int     i = 0;
 
     normalize(&(data->player->angle));
-    // if (check_and_move(data, data->player->angle - (15 * M_PI / 180)) == 0 &&\
-    // check_and_move(data, data->player->angle + (15 * M_PI / 180)) == 0)
-    // {
-    //     printf("hello\n");
-    //     return ;
-    // }
-    
-	y = data->player->py + (3 * sin(data->player->angle) * (data->player->walk_dir));
-	x = data->player->px + (3 * cos(data->player->angle) * (data->player->walk_dir));
+    y = data->player->py + (3 *sin(data->player->angle) * (data->player->walk_dir) * data->player->p_speed);
+	x = data->player->px + (3 *cos(data->player->angle) * (data->player->walk_dir) * data->player->p_speed);
     angle = data->player->angle;
     while(i < 8)
     {
@@ -326,22 +316,20 @@ void player_movement(t_data *data)
         angle += 45 * M_PI / 180;
         i++;
     }
-
     if (flag != 0 && data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '1')
     {
-        data->player->px = x;
-        data->player->py = y;
+		data->player->py += sin(data->player->angle) * (data->player->walk_dir) * data->player->p_speed;
+		data->player->px += cos(data->player->angle) * (data->player->walk_dir) * data->player->p_speed;
     }
     else
     {
-        y = data->player->py + (sin(data->player->angle) * (data->player->walk_dir));
-        x = data->player->px + (cos(data->player->angle) * (data->player->walk_dir));
+        y = data->player->py + (3 * sin(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2));
+        x = data->player->px + (3 * cos(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2));
         if (data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '1')
-            data->player->py = y;
+            data->player->py += sin(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2);
         if (data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '1')
-            data->player->px = x;
+            data->player->px += cos(data->player->angle) * (data->player->walk_dir) * (data->player->p_speed / 2);
 	}
-	
 }
 
 int	init_player(t_data *data, double angle, int x, int y)
@@ -356,28 +344,28 @@ int	init_player(t_data *data, double angle, int x, int y)
 	return (0);
 }
 
-void    mini_map(t_data *data)
-{
-	int		i = 0;
-    int     j = 0;
+// void    mini_map(t_data *data)
+// {
+// 	int		i = 0;
+//     int     j = 0;
 
-	while(j < data->column_len)
-	{
-        i = 0;
-        while(i < data->row_len)
-        {
-            if (data->map->map[j][i] == '1')
-                put_square(data, i * 16, j * 16, 16, 0xffffffff);
-            else
-                put_square(data, i * 16, j * 16, 16, 0x00000000);
-            i++;
-        }
-        j++;
-    }
-    // put_square(data, data->player->px - 2.0, data->player->py - 2.0, 4.0, 0xFF00000);
-    // line(data, 16, 0xFF00000);
-    /* draw_rays(data); */
-}
+// 	while(j < data->column_len)
+// 	{
+//         i = 0;
+//         while(i < data->row_len)
+//         {
+//             if (data->map->map[j][i] == '1')
+//                 put_square(data, i * 16, j * 16, 16, 0xffffffff);
+//             else
+//                 put_square(data, i * 16, j * 16, 16, 0x00000000);
+//             i++;
+//         }
+//         j++;
+//     }
+//     // put_square(data, data->player->px - 2.0, data->player->py - 2.0, 4.0, 0xFF00000);
+//     // line(data, 16, 0xFF00000);
+//     /* draw_rays(data); */
+// }
 
 void    setup_testures(t_data *data)
 {
