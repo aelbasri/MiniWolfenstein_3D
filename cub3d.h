@@ -110,5 +110,7 @@ typedef struct s_data
 } t_data;
 
 int	ft_Read_Map(char *file, t_map *map);
+void    mini_map(t_data *data);
+int	ft_jock(char **str, int flag);
 
 #endif
