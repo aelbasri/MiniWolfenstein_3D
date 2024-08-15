@@ -1,34 +1,31 @@
-NAME = cub3d
+CFLAGS = -g3 #-Wall -Wextra -Werror
+XFLAGS = -lXext -lX11 -lm
+SRCS = parse_map.c cub3d.c #libft/ft_strlen.c libft/ft_strchr.c libft/ft_strjoin.c libft/ft_strdup.c #get_next_line/get_next_line.c 
+HEADERS = cub3d.h libft/libft.h #get_next_line/get_next_line.h
+OBJS = $(SRCS:.c=.o)
 
+LIBX = minilibx-linux/libmlx.a
+LIBFT = libft/libft.a
+NAME = cub3D
 
+all : $(NAME)
 
-SRC = $(wildcard *.c)
-SRC_libft = $(wildcard libft/*.c)
-OBJECTS = $(SRC:.c=.o)
-OBJECTS_LIBFT = $(SRC_libft:.c=.o)
+.c.o : 
+	cc -c $(CFLAGS) -o $@ $^
 
-CC = gcc
+$(NAME) : $(OBJS) $(HEADERS) $(LIBX) $(LIBFT)
+	cc  $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBX) $(LIBFT) -o $(NAME)
 
-CFLAGS = #-Wall -Wextra -Werror  
-MLX = -Lminilibx-linux -lmlx -lXext -lX11 -lm
+$(LIBX) :
+	$(MAKE) -C minilibx-linux
+$(LIBFT) :
+	$(MAKE) -C libft
 
-
-all: $(NAME) 
-	@rm -rf *.o
-
-$(NAME): $(OBJECTS)  $(OBJECTS_LIBFT)
-	@$(CC) $(OBJECTS)  $(MLX) $(OBJECTS_LIBFT) $(libft)    -o $(NAME)
-
-%.o: %.c
-	@$(CC) $(MLX) $(CFLAGS) -c -o $@ $< 
-
-clean:
-	@rm -f   $(OBJECTS)   && rm -rf *.o > /dev/null
-fclean: clean
-	@rm -rf ./cub3d
-
-re: fclean all
-
-.PHONY: all clean  fclean re bonus
-
-.SECONDARY: 
+clean :
+	rm -f $(OBJS)
+	$(MAKE) clean -C libft
+fclean : clean 
+	rm -f $(NAME)
+	$(MAKE) clean -C minilibx-linux
+	$(MAKE) fclean -C libft
+re : fclean all
