@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelbassat <abdelbassat@student.42.fr>    #+#  +:+       +#+        */
+/*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-08-15 08:29:59 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024-08-15 08:29:59 by abdelbassat      ###   ########.fr       */
+/*   Created: 2024/08/15 08:29:59 by abdelbassat       #+#    #+#             */
+/*   Updated: 2024/08/15 10:48:26 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void put_square(t_data *data, int x, int y, int size, int color)
         {
 			if ((xi >= x && xi < ex) && (yi >= y && yi < ey))
             {
-                /*if (xi == 0 || yi == 0 || xi == ex - 1 || yi == ey - 1)
+                if (xi == 0 || yi == 0 || xi == ex - 1 || yi == ey - 1)
                     my_mlx_pixel_put(data->img, xi, yi, 0x00000000);	
-                else*/
+                else
                 my_mlx_pixel_put(data->img, xi, yi, color);		
             }
             xi++;
@@ -52,43 +52,39 @@ void    mini_map(t_data *data)
     int flag = 0;
 
     int x1 = ft_strlen(&data->map->map[(int)y][(int)x]);
-    int y1 = ft_jock(data->map->map , 3);
+    int y1 = ft_jock(data->map->map , 3) - (int)y;
 
-
-    y1 -= (int)y;
-    i = ((x - 10) < 0) * 0 + !((x - 10) < 0) * (x - 10);
-    if(x1 < 10)
-      i -= 10 - x1;
-    j = ((y - 4) < 0) * 0 + !((y - 4) < 0) * (y - 4);
-    if(y1 < 4)
-        j -= 4 - y1;
     
-    i = ((i) < 0) * 0 + !((i) < 0) * i;
-    j = (j < 0) * 0 + (!j < 0) * i;
+    i = !(x - 10 < 0) * (x - 10) - (x1 < 10) * (10 - x1);
+    j = !((y - 4) < 0) * (y - 4) - (y1 < 4) * (4 - y1);
+    
+    i =  (i < 0) * 0  +  !(i < 0) * i;   
+    j =  (j < 0) * 0  +  !(j < 0) * j;   
+
+
+    
     x -= i;
     y -= j;
     
-    printf("%d %d\n" , i , j);
-    int k = 0;
-    int u = 0;
-	while(u < 8)
+    x1 = 0;
+    y1 = 0;
+	while(y1 < 8)
 	{
-     k = 0;
-        while(k < 20)
+     x1 = 0;
+        while(x1 < 20)
         {
-            if(!flag && (!data->map->map[j + u] || !data->map->map[j + u ][i + k]))
+            if(!flag && (!data->map->map[j + y1] || !data->map->map[j + y1 ][i + x1]))
                 flag = 1;
-            
-            if ((!flag  && data->map->map[j + u][i + k] == '1') || flag)
+            if (!flag  && data->map->map[j + y1][i + x1] == '1' )
                 color = 8612715;
             else 
-                color =  458751 ;
-              put_square(data, k * 20, u * 20, 20, color);
-            k++;
+                color =  flag * 8612715 + !flag * 458751 ;
+              put_square(data, x1 * 20, y1 * 20, 20, color);
+            x1++;
         }
-        if(data->map->map[j + u])
+        if(data->map->map[j + y1])
              flag = 0;
-        u++;
+        y1++;
     }
     put_square(data, (x * 20) - 4, (y * 20) - 4, 8, 11);
 

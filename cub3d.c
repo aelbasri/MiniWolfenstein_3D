@@ -264,8 +264,8 @@ int    check_and_move(t_data *data, double angle)
     double	x;
     double	y;
 
-    y = data->player->py + (3 * sin(angle));
-	x = data->player->px + (3 * cos(angle));
+    y = data->player->py + (6 * sin(angle));
+	x = data->player->px + (6 * cos(angle));
     if (data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '1')
         return (1);
     return (0);
@@ -381,7 +381,7 @@ int draw_map(t_data *data)
     player_movement(data);
     ray_casting(data);
     render_walls(data);
-    // mini_map(data);
+    mini_map(data);
     /* draw_rays(data); */
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
     data->player->walk_dir = 0;
