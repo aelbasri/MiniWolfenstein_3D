@@ -14,6 +14,33 @@
 
 
 
+void put_square(t_data *data, int x, int y, int size, int color)
+{
+	int xi = 0;
+	int yi = 0;
+	int ex = x + size;
+	int	ey = y + size;
+
+    while (yi < ey && yi <= data->hi)
+    {
+		xi = 0;
+        while (xi < ex && xi <= data->wi)
+        {
+			if ((xi >= x && xi < ex) && (yi >= y && yi < ey))
+            {
+                /*if (xi == 0 || yi == 0 || xi == ex - 1 || yi == ey - 1)
+                    my_mlx_pixel_put(data->img, xi, yi, 0x00000000);	
+                else*/
+                my_mlx_pixel_put(data->img, xi, yi, color);		
+            }
+            xi++;
+        }
+        yi++;
+    }
+}
+
+
+
 void    mini_map(t_data *data)
 {
 	int		i = 0;

@@ -112,5 +112,5 @@ typedef struct s_data
 int	ft_Read_Map(char *file, t_map *map);
 void    mini_map(t_data *data);
 int	ft_jock(char **str, int flag);
-
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 #endif
