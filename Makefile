@@ -1,6 +1,6 @@
 CFLAGS = -g3 #-Wall -Wextra -Werror
 XFLAGS = -lXext -lX11 -lm
-SRCS = parse_map.c cub3d.c #libft/ft_strlen.c libft/ft_strchr.c libft/ft_strjoin.c libft/ft_strdup.c #get_next_line/get_next_line.c 
+SRCS = parse_map.c cub3d.c minimap.c #libft/ft_strlen.c libft/ft_strchr.c libft/ft_strjoin.c libft/ft_strdup.c #get_next_line/get_next_line.c 
 HEADERS = cub3d.h libft/libft.h #get_next_line/get_next_line.h
 OBJS = $(SRCS:.c=.o)
 

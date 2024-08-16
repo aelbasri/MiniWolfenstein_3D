@@ -102,7 +102,7 @@ typedef struct s_data
 	int     fd;
 	int		text_y;
 	int		text_x;
-	t_img	walls[4];
+	t_img	walls[6];
 	t_ray	*ray;
 	t_map	*map;
 	t_img	*img;
@@ -110,6 +110,7 @@ typedef struct s_data
 } t_data;
 
 int	ft_Read_Map(char *file, t_map *map);
+void put_square(t_data *data, int x, int y, int size, int color);
 void    mini_map(t_data *data);
 int	ft_jock(char **str, int flag);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
