@@ -91,6 +91,7 @@ typedef struct s_map
 typedef struct s_data
 {
 	int		flag;
+	int		movement_flag;
     double  steps;
 	int		rays_nbr;
 	int		row_len;
@@ -100,6 +101,7 @@ typedef struct s_data
 	void    *mlx;
     void    *win;
 	int     fd;
+	double	angle;
 	int		text_y;
 	int		text_x;
 	t_img	walls[6];
