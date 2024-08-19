@@ -97,6 +97,7 @@ typedef struct s_data
 	int		row_len;
 	int		column_len;
 	int		wi;
+	int flag_v1;
 	int		hi;
 	void    *mlx;
     void    *win;
@@ -104,6 +105,7 @@ typedef struct s_data
 	double	angle;
 	int		text_y;
 	int		text_x;
+	t_img *animation;
 	t_img	walls[6];
 	t_ray	*ray;
 	t_map	*map;
@@ -116,4 +118,10 @@ void put_square(t_data *data, int x, int y, int size, int color);
 void    mini_map(t_data *data);
 int	ft_jock(char **str, int flag);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+
+int	my_mlx_pixel_put_v1(t_img *data, int x, int y);
+void ft_setup(t_data *data);
+void	ft_sprit(t_data *data);
+
+
 #endif

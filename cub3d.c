@@ -254,7 +254,7 @@ void player_movement(t_data *data)
     int     i = 0;
 
     normalize(&(data->player->angle));
-    printf("hello %d\n", data->movement_flag);
+    // printf("hello %d\n", data->movement_flag);
     y = data->player->py + (3 *sin(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * data->player->p_speed);
 	x = data->player->px + (3 *cos(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * data->player->p_speed);
     angle = data->player->angle;
@@ -342,6 +342,9 @@ int draw_map(t_data *data)
     ray_casting(data);
     render_walls(data);
     mini_map(data);
+// abdelbassat
+    ft_sprit(data);
+// abdelbassat
     /* draw_rays(data); */
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
     data->player->walk_dir = 0;
@@ -366,7 +369,10 @@ int update_player(int key_code, t_data *data)
 {
     int		x;
     int		y;
-
+// abdelbassat
+    if(key_code == 'f')
+        data->flag_v1 = 1;
+// abdelbassat
 	if (key_code == LF_KEY)
 		data->player->angle = data->player->angle - (4 * (M_PI / 180));
     else if (key_code == RT_KEY)
@@ -425,6 +431,9 @@ int main(int ac, char **av)
     data.img->img = mlx_new_image(data.mlx, data.wi, data.hi);
     data.img->addr = mlx_get_data_addr(data.img->img, &(data.img->bits_per_pixel), &(data.img->line_length), &(data.img->endian));
     setup_testures(&data);
+// abdelbassat
+    ft_setup(&data);
+// abdelbassat
 	mlx_hook(data.win, 2, 1L<<0, &update_player, &data);
     mlx_loop_hook(data.mlx, draw_map , &data);
     mlx_loop(data.mlx);
