@@ -48,36 +48,27 @@ void	player_movement(t_data *data)
 		angle += 30 * M_PI / 180;
 		i++;
 	}
-	if (flag != 0 && (data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != \
-	'1' && data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '2'))
+	if (flag != 0 && (data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '1' && data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '2'))
 	{
-		data->player->py += sin(data->player->angle + (data->movement_flag * \
-		(M_PI / 2))) * (data->player->walk_dir) * data->player->p_speed;
-		data->player->px += cos(data->player->angle + (data->movement_flag * \
-		(M_PI / 2))) * (data->player->walk_dir) * data->player->p_speed;
+		data->player->py += sin(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * data->player->p_speed;
+		data->player->px += cos(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * data->player->p_speed;
 	}
 	else
 	{
-		y = data->player->py + (3 * sin(data->player->angle + (data->movement_flag\
-		* (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2));
-		x = data->player->px + (3 * cos(data->player->angle + (data->movement_flag * \
-		(M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2));
-		if (data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '1'\
-		 && data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '2')
-			data->player->py += sin(data->player->angle + (data->movement_flag * (M_PI / 2)))\
-			 * (data->player->walk_dir) * (data->player->p_speed / 2);
-		if (data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '1'\
-		&& data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '2')
-			data->player->px += cos(data->player->angle + (data->movement_flag * \
-			(M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2);
+		y = data->player->py + (3 * sin(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2));
+		x = data->player->px + (3 * cos(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2));
+		if (data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '1' && data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '2')
+			data->player->py += sin(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2);
+		if (data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '1' && data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '2')
+			data->player->px += cos(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2);
 	}
 	data->movement_flag = 0;
 }
 
 int	update_player(int key_code, t_data *data)
 {
-	if(key_code == 'f')
-        data->flag_v1 = 1;
+	if (key_code == 'f')
+		data->flag_v1 = 1;
 	else if (key_code == LF_KEY)
 		data->player->angle = data->player->angle - (4 * (M_PI / 180));
 	else if (key_code == RT_KEY)
@@ -95,12 +86,12 @@ int	update_player(int key_code, t_data *data)
 		open_door(data);
 	else if (key_code == D_KEY)
 	{
-		data->movement_flag=1; 
+		data->movement_flag = 1;
 		data->player->walk_dir = 1;
 	}
 	else if (key_code == ESC_KEY)
 	{
 		ft_exit(data);
 	}
-	return (0); 
+	return (0);
 }

@@ -141,6 +141,7 @@ void put_square(t_data *data, int x, int y, int size, int color);
 void    mini_map(t_data *data);
 int	ft_jock(char **str, int flag);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int    check_and_move(t_data *data, double angle);
 void player_movement(t_data *data);
 int update_player(int key_code, t_data *data);
@@ -150,7 +151,6 @@ void    check_direction_horizontal(t_ray_cast *cast, t_data *data, double angle)
 void    check_direction_vertical(t_ray_cast *cast, t_data *data, double angle);
 void    get_intersections_horizontal(t_ray_cast *cast, t_ray *ray, t_data *data, double angle);
 void    get_intersections_vertical(t_ray_cast *cast, t_ray *ray, t_data *data, double angle);
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void    get_x(int *b, double *x, t_ray *ray, t_data *data);
 void    one_wall_rendering(t_data *data, int j, t_ray *ray);
 void    render_walls(t_data *data);
