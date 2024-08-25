@@ -89,6 +89,17 @@ int	draw_map(t_data *data)
 	mini_map(data);
 	ft_sprit(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
+	t_ray *tmp1;
+	t_ray *ray;
+
+	ray = data->ray;
+	while (ray)
+	{
+		tmp1 = ray->next;
+		free(ray);
+		ray = tmp1;
+	}
+	data->ray = NULL;
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
 	return (0);

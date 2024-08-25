@@ -48,8 +48,28 @@ void	open_door(t_data *data)
 
 void	ft_exit(t_data *data)
 {
+	t_ray *ray;
+	t_ray *tmp;
+	int		i;
+
+	ray = data->ray;
+	while (ray)
+	{
+		tmp = ray->next;
+		free(ray);
+		ray = tmp;
+	}
+	data->ray = NULL;
+	i = 0;
+	while(i < 6)
+		mlx_destroy_image(data->mlx, data->walls[i++].img);
 	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->img->img);
 	mlx_destroy_display(data->mlx);
+	free(data->map);
+	free(data->img);
+	free(data->mlx);
+	free(data->player);
 	exit(1);
 }
 
