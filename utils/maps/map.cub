@@ -2,7 +2,7 @@
 
 
 
-SO ./utils/assets/nether_minecraft.xpm
+SO ./utils/assets/nether_minecraft.xpm 
 WE ./utils/assets/333.xpm
 EA ./utils/assets/333.xpm
 NO ./utils/assets/nether_minecraft.xpm

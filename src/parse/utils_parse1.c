@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 04:37:09 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/26 17:13:35 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 22:27:28 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_path(char *str, t_map *map)
 
 	count = 0;
 	ss = ft_split(str, ' ');
-	if (!ss[1])
+	if (ft_len_v1(ss) != 2 || !ss[1])
 		return (-20);
 	if (!strcmp(ss[0], "NO") && !chpath(ss[1], ".xpm") && ++count)
 		map->no = ft_strdup(ss[1]);
