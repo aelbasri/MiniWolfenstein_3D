@@ -63,7 +63,8 @@ void	get_intersections_horizontal(t_ray_cast *cast, t_ray \
 		if (cast->y_init + cast->i < 0 || \
 		cast->y_init + cast->i >= data->column_len || \
 		data->map->map[cast->y_init + cast->i][(int)ray->x / T_SIZE] == '1' || \
-		data->map->map[cast->y_init + cast->i][(int)ray->x / T_SIZE] == '2')
+		data->map->map[cast->y_init + cast->i][(int)ray->x / T_SIZE] == '2' || \
+		data->map->map[cast->y_init + cast->i][(int)ray->x / T_SIZE] == ' ')
 			break ;
 		cast->y_init += cast->j;
 	}
@@ -83,7 +84,8 @@ void	get_intersections_vertical(t_ray_cast *cast, t_ray \
 		if (cast->x_init + cast->i < 0 || \
 		cast->x_init + cast->i >= data->row_len || \
 		data->map->map[(int)ray->y / T_SIZE][cast->x_init + cast->i] == '1' || \
-		data->map->map[(int)ray->y / T_SIZE][cast->x_init + cast->i] == '2')
+		data->map->map[(int)ray->y / T_SIZE][cast->x_init + cast->i] == '2' || \
+		data->map->map[(int)ray->y / T_SIZE][cast->x_init + cast->i] == ' ')
 			break ;
 		cast->x_init += cast->j;
 	}

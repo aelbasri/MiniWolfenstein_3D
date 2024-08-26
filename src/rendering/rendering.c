@@ -86,7 +86,7 @@ int	draw_map(t_data *data)
 	player_movement(data);
 	ray_casting(data);
 	render_walls(data);
-	mini_map(data);
+	// mini_map(data);
 	ft_sprit(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	t_ray *tmp1;

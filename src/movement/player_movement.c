@@ -20,7 +20,8 @@ int	check_and_move(t_data *data, double angle)
 	y = data->player->py + (3 * sin(angle));
 	x = data->player->px + (3 * cos(angle));
 	if (data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '1' \
-	&& data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '2')
+	&& data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '2' \
+	&& data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != ' ')
 		return (1);
 	return (0);
 }
@@ -48,7 +49,9 @@ void	player_movement(t_data *data)
 		angle += 30 * M_PI / 180;
 		i++;
 	}
-	if (flag != 0 && (data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '1' && data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '2'))
+	if (flag != 0 && (int)(y / T_SIZE) < data->column_len && (int)(x / T_SIZE) < data->row_len && (data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '1' \
+	&& data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != '2') \
+	&& data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != ' ')
 	{
 		data->player->py += sin(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * data->player->p_speed;
 		data->player->px += cos(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * data->player->p_speed;
@@ -57,9 +60,9 @@ void	player_movement(t_data *data)
 	{
 		y = data->player->py + (3 * sin(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2));
 		x = data->player->px + (3 * cos(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2));
-		if (data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '1' && data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '2')
+		if ((int)(y / T_SIZE) < data->column_len && (int)(data->player->px / T_SIZE) < data->row_len && data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '1' && data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != '2' && data->map->map[(int)(y / T_SIZE)][(int)(data->player->px / T_SIZE)] != ' ')
 			data->player->py += sin(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2);
-		if (data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '1' && data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '2')
+		if ((int)(data->player->py / T_SIZE) < data->column_len && (int)(x / T_SIZE) < data->row_len && data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '1' && data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != '2' && data->map->map[(int)(data->player->py / T_SIZE)][(int)(x / T_SIZE)] != ' ')
 			data->player->px += cos(data->player->angle + (data->movement_flag * (M_PI / 2))) * (data->player->walk_dir) * (data->player->p_speed / 2);
 	}
 	data->movement_flag = 0;

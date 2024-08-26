@@ -44,6 +44,6 @@ void	get_x(int *b, double *x, t_ray *ray, t_data *data)
 	}
 	j = (int)((ray->y + sin(ray->angle)) / T_SIZE);
 	i = (int)((ray->x + cos(ray->angle)) / T_SIZE);
-	if (data->map->map[j][i] == '2')
+	if (j < data->column_len && i < data->row_len && data->map->map[j][i] == '2')
 		*b = 4;
 }
