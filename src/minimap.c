@@ -6,90 +6,108 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 08:29:59 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024/08/15 10:48:26 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:20:46 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void put_square(t_data *data, int x, int y, int size, int color)
+void	line(t_data *data, double x, double y)
 {
-	int xi = 0;
-	int yi = 0;
-	int ex = x + size;
-	int	ey = y + size;
+	double	steps;
+	double	i;
+	t_line	line;
 
-    while (yi < ey && yi <= data->hi)
-    {
-		xi = 0;
-        while (xi < ex && xi <= data->wi)
-        {
-			if ((xi >= x && xi < ex) && (yi >= y && yi < ey))
-            {
-                /* if (xi == 0 || yi == 0 || xi == ex - 1 || yi == ey - 1)
-                     my_mlx_pixel_put(data->img, xi, yi, 0x00000000);	
-                 else*/
-                my_mlx_pixel_put(data->img, xi, yi, color);		
-            }
-            xi++;
-        }
-        yi++;
-    }
+	i = 0;
+	line.x2 = (data->player->px) + (20 * cos(data->player->angle));
+	line.y2 = (data->player->py) + (20 * sin(data->player->angle));
+	line.xs = line.x2 - data->player->px;
+	line.ys = line.y2 - data->player->py;
+	steps = fmax(fabs(line.xs), fabs(line.ys));
+	line.xi = line.xs / steps;
+	line.yi = line.ys / steps;
+	while (i <= steps && (x >= 0 && x < data->row_len * 16) && ((y >= 0
+				&& y < data->column_len * 16)))
+	{
+		my_mlx_pixel_put(data->img, x, y, 432);
+		x = x + line.xi;
+		y = y + line.yi;
+		i++;
+	}
 }
 
-
-
-void    mini_map(t_data *data)
+void	put_square(t_data *data, int x, int y, int color)
 {
-	int		i = 0;
-    int     j = 0;
-    // abdo
-    double x = (data->player->px) / S_WALL ; 
-    double y = (data->player->py)  / S_WALL ;
-    int color = 0;
-    int flag = 0;
+	int	xi;
+	int	yi;
+	int	ex;
+	int	ey;
+	int	size;
 
-    int x1 = ft_strlen(&data->map->map[(int)y][(int)x]);
-    int y1 = ft_jock(data->map->map , 3) - (int)y;
-
-    
-    i = !(x - 10 < 0) * (x - 10) - (x1 < 10) * (10 - x1);
-    j = !((y - 4) < 0) * (y - 4) - (y1 < 4) * (4 - y1);
-    
-    i =  (i < 0) * 0  +  !(i < 0) * i;   
-    j =  (j < 0) * 0  +  !(j < 0) * j;   
-
-
-    
-    x -= i;
-    y -= j;
-    char c;
-    x1 = 0;
-    y1 = 0;
-	while(y1 < 8)
+	size = 20;
+	if (color == 11)
+		size = 8;
+	xi = 0;
+	yi = 0;
+	ex = x + size;
+	ey = y + size;
+	while (yi < ey && yi <= data->hi)
 	{
-     x1 = 0;
-        while(x1 < 20)
-        {
-            if(!flag && (!data->map->map[j + y1] || !data->map->map[j + y1 ][i + x1]))
-                flag = 1;
-            if (!flag)
-            {
-                c = data->map->map[j + y1][i + x1];
-                color = (c == '3') * 65280 + (c == '2') * 16711680 + (c == '1') *  734550 + (c == '0'|| c == ' ') *  15496470;
-            }
-            else 
-                color =  flag * 734550 + !flag * 15496470 ;
-              put_square(data, x1 * 20, y1 * 20, 20, color);
-            x1++;
-        }
-        if(data->map->map[j + y1])
-             flag = 0;
-        y1++;
-    }
-    put_square(data, (x * 20) - 4, (y * 20) - 4, 8, 11);
+		xi = 0;
+		while (xi < ex && xi <= data->wi)
+		{
+			if ((xi >= x && xi < ex) && (yi >= y && yi < ey))
+				my_mlx_pixel_put(data->img, xi, yi, color);
+			xi++;
+		}
+		yi++;
+	}
+}
 
-    // put_square(data, data->player->px - 2.0, data->player->py - 2.0, 4.0, 0xFF00000);
-    // line(data, 16, 0xFF00000);
-    /* draw_rays(data); */
+void	draw_minimap(t_data *data, int i, int j)
+{
+	int		x1;
+	int		y1;
+	char	c;
+	int		color;
+
+	x1 = 0;
+	y1 = 0;
+	while (y1 < data->map->y_win && y1 < MINI_Y)
+	{
+		x1 = 0;
+		while (x1 < data->map->x_win && x1 < MINI_X)
+		{
+			c = data->map->map[j + y1][i + x1];
+			color = (c == '3') * 65280 + (c == '2') * 16711680 + (c == '1')
+				* 734550 + (c == '0' || c == ' ') * 15496470;
+			put_square(data, x1 * 20, y1 * 20, color);
+			x1++;
+		}
+		y1++;
+	}
+}
+
+void	mini_map(t_data *data)
+{
+	int		i;
+	int		j;
+	double	x;
+	double	y;
+
+	x = (data->player->px) / S_WALL;
+	y = (data->player->py) / S_WALL;
+	i = ft_strlen(&data->map->map[(int)y][(int)x]);
+	j = ft_len_v1(data->map->map) - (int)y;
+	i = !(x - MINI_X / 2 < 0) * (x - MINI_X / 2) - (i < MINI_X / 2) * (MINI_X
+			/ 2 - i);
+	j = !(y - MINI_Y / 2 < 0) * (y - MINI_Y / 2) - (j < MINI_Y / 2) * (MINI_Y
+			/ 2 - j);
+	i = (i > 0) * i;
+	j = (j > 0) * j;
+	x -= i;
+	y -= j;
+	draw_minimap(data, i, j);
+	put_square(data, (x * 20) - 4, (y * 20) - 4, 11);
+	line(data, (x * 20), (y * 20));
 }

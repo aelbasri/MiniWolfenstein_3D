@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:01:28 by abquaoub          #+#    #+#             */
-/*   Updated: 2023/11/15 05:08:37 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 00:02:51 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	if (s1[i] == '\0')
 	{
-		res = (char *)malloc(sizeof(char) * 1);
+		res = (char *)ft_malloc(sizeof(char) * 1);
 		if (!res)
 			return (0);
 		res[0] = 0;

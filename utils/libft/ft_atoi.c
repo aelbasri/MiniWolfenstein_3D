@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:02:26 by abquaoub          #+#    #+#             */
-/*   Updated: 2023/11/15 04:40:33 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:52:18 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	ft_atoi(const char *theString)
 	int	s;
 	int	res;
 	int	i;
-
-	
 	s = 1;
 	res = 0;
 	i = 0;

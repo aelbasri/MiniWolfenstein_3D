@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelbasri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:01:31 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/23 12:13:15 by aelbasri         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:23:07 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ void	setup_testures(t_data *data)
 
 int	draw_map(t_data *data)
 {
+	int  x ;
+	int y ;
+	x  = 0;
+	y = 0;
 	mlx_destroy_image(data->mlx, data->img->img);
 	data->img->img = mlx_new_image(data->mlx, data->wi, data->hi);
 	data->img->addr = mlx_get_data_addr(data->img->img, &(data->img->bits_per_pixel), &(data->img->line_length), &(data->img->endian));
@@ -86,8 +90,13 @@ int	draw_map(t_data *data)
 	player_movement(data);
 	ray_casting(data);
 	render_walls(data);
-	// mini_map(data);
+	mini_map(data);
 	ft_sprit(data);
+
+	 mlx_mouse_get_pos(data->mlx  ,data->win , &x , &y);
+    data->player->angle = data->player->angle + (-(data->x - x) * (M_PI / 180));
+    mlx_mouse_get_pos(data->mlx  ,data->win , &data->x , &data->y);
+
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 	t_ray *tmp1;
 	t_ray *ray;

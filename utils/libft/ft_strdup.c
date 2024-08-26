@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:11:46 by abquaoub          #+#    #+#             */
-/*   Updated: 2023/11/15 21:12:46 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 00:05:13 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*ft_strdup(const char *source )
 	char	*dest;
 	size_t	len;
 	size_t	i;
-
 	len = ft_strlen(source);
 	i = 0;
-	dest = (char *)malloc(len + 1);
+	dest = (char *)ft_malloc(len + 1);
+
 	if (!dest)
 		return (0);
 	while (source[i] != '\0')

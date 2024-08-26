@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 11:38:49 by abquaoub          #+#    #+#             */
-/*   Updated: 2023/11/23 03:50:29 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:57:28 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <string.h>
 # include <unistd.h>
 
+
+
 typedef struct s_list
 {
 	char **path;
@@ -27,6 +29,9 @@ typedef struct s_list
 	int color;
 	struct s_list	*next;
 }					t_list;
+
+
+#include "/nfs/homes/abquaoub/Desktop/last_version/include/cub3d.h"
 
 int					ft_atoi(const char *theString);
 void				ft_bzero(void *dst, size_t n);

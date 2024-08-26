@@ -43,3 +43,18 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean  fclean re bonus
+
+
+
+
+
+#error segv 1
+# 0x000000000040522c in get_x (b=0x7fffffffdb28, x=0x7fffffffdb30, ray=0xa1d6b0, data=0x7fffffffdcc0) at src/rendering/rendering_utils.c:28
+# 28	    if (data->map->map[(int)((ray->y + sin(ray->angle)) / T_SIZE)][(int)((ray->x + cos(ray->angle)) / T_SIZE)] == '2')
+
+#error segv 2
+
+# Program received signal SIGSEGV, Segmentation fault.
+# 0x00000000004039c2 in player_movement (data=0x7fffffffdcc0) at src/movement/player_movement.c:52
+# 52		if (flag != 0 && (data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] != \
+# 

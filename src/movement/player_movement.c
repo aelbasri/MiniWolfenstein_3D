@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelbasri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 21:33:08 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/21 21:33:11 by aelbasri         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:27:15 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,13 @@ void	player_movement(t_data *data)
 
 int	update_player(int key_code, t_data *data)
 {
-	if (key_code == 'f')
-		data->flag_v1 = 1;
+	static int j;
+
+
+	if (!j)
+		return (j++, 0);
+	if(key_code == 'f')
+        data->flag_v1  = !data->flag_v1;
 	else if (key_code == LF_KEY)
 		data->player->angle = data->player->angle - (4 * (M_PI / 180));
 	else if (key_code == RT_KEY)

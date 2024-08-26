@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 08:45:44 by abquaoub          #+#    #+#             */
-/*   Updated: 2023/11/15 04:26:23 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:49:19 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*ft_itoa(int n)
 		arr = ft_strdup("0");
 		return (arr);
 	}
-	arr = (char *)malloc(len + 1);
+	arr = (char *)ft_malloc(len + 1);
 	if (!arr)
 		return (0);
 	ft_test(arr, i, len, number);

@@ -8,10 +8,13 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../utils/minilibx-linux/mlx.h"
-# include "../utils/libft/libft.h"
+# include "/nfs/homes/abquaoub/Desktop/last_version/utils/libft/libft.h"
 
 # define VERTICAL 1
 # define HORIZONTAL 0
+
+# define MINI_X 14
+# define MINI_Y 6
 
 # define W_KEY 119
 # define A_KEY 97
@@ -113,6 +116,8 @@ typedef struct s_map
 
 typedef struct s_data
 {
+	int x;
+	int y;
 	int		flag;
 	int		movement_flag;
     double  steps;
@@ -136,10 +141,9 @@ typedef struct s_data
     t_player   *player;
 } t_data;
 
-int	ft_Read_Map(char *file, t_map *map);
-void put_square(t_data *data, int x, int y, int size, int color);
+int	ft_read_map(char *file, t_map *map );
+void	put_square(t_data *data, int x, int y, int color);
 void    mini_map(t_data *data);
-int	ft_jock(char **str, int flag);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int    check_and_move(t_data *data, double angle);
@@ -165,5 +169,17 @@ void    init(t_data *data);
 int	my_mlx_pixel_put_v1(t_img *data, int x, int y);
 void ft_setup(t_data *data);
 void	ft_sprit(t_data *data);
+int	ft_path(char *str, t_map *map);
+int	ft_check_char(char *str, t_map *map);
+void	ft_check_num(char *num, int *color , int *count);
+int	check_space(char **map, int i, int j);
+char	*get_next_line(char *file);
+char	*ft_join(char *str, int max);
+int	chpath(char *file, char *ex);
+int	ft_len_v1(char **str);
+t_list *ft_return();
+void *ft_malloc(size_t num);
+void ft_free();
+char	*ft_return_num(char *num);
 
 #endif

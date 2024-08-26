@@ -6,23 +6,13 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:01:44 by abquaoub          #+#    #+#             */
-/*   Updated: 2023/11/18 12:05:54 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 00:02:36 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**ft_free(char **ptr, int i)
-{
-	i--;
-	while (i >= 0)
-	{
-		free(ptr[i]);
-		i--;
-	}
-	free(ptr);
-	return (0);
-}
+
 
 static int	count_word(char *s, char c)
 {
@@ -59,7 +49,7 @@ static char	**mini_split(char const *s, char c, char **arr, int len_words)
 			j++;
 		arr[word] = ft_substr(s, i, j);
 		if (arr[word] == NULL)
-			return (ft_free(arr, word));
+			return (0);
 		i = i + j;
 		word++;
 	}
@@ -71,11 +61,13 @@ char	**ft_split(char *s, char c)
 {
 	char			**arr;
 	unsigned int	len_words;
-
+	t_list *head = ft_return();
 	if (!s)
 		return (0);
 	len_words = count_word(s, c);
 	arr = (char **)malloc(sizeof(char *) * (len_words + 1));
+	ft_lstadd_back( &head , ft_lstnew(arr));
+	
 	if (!arr)
 		return (0);
 	arr = mini_split(s, c, arr, len_words);

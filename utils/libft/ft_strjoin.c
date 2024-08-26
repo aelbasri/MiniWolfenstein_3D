@@ -6,21 +6,20 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:01:35 by abquaoub          #+#    #+#             */
-/*   Updated: 2023/11/21 02:19:25 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 00:01:09 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char  *s1, char  *s2)
+char	*ft_strjoin(char  *s1, char  *s2 )
 {
 	char	*res;
 	int		i;
 	int		j;
-
 	if (!s1)
 		s1 = ft_strdup("");
-	res = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	res = (char *)ft_malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!res)
 		return (0);
 	i = 0;
@@ -36,5 +35,5 @@ char	*ft_strjoin(char  *s1, char  *s2)
 		j++;
 	}
 	res[i + j] = '\0';
-	return (res);
+	return (  res);
 }
