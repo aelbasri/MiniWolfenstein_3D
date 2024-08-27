@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:39:59 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/26 23:28:36 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:53:35 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,21 @@ void	ft_sprit(t_data *data)
 	static int	j;
 	static int	i;
 	int			counter;
+	static int	flag = 1;
 
-	counter = (i >= 4 && i <= 22) * 2 + !(i >= 4 && i <= 22) * 8;
+	counter = (i >= 4 && i <= 22) * 3 + !(i >= 4 && i <= 22) * 9;
 	j++;
-	j = (j == counter && i++) * 0 + !(j == counter) * j;
+	if (j == counter)
+	{
+		i += flag;
+		j = 0;
+	}
 	ft_render_img(data, &data->animation[i]);
 	if (data->flag_v1)
-		i = (i >= 30) * 22 + !(i >= 30) * i;
+		flag = (i >= 30) * (-1) + (i <= 23) + (i > 23 && i < 30) * flag;
 	else
+	{
+		flag = 1;
 		i = !(i >= 4) * i;
+	}
 }
