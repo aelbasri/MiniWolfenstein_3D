@@ -29,7 +29,6 @@ char	*ft_return_num(char *num)
 t_list	*ft_return(void)
 {
 	static t_list	head;
-
 	return (&head);
 }
 

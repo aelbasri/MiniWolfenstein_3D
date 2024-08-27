@@ -12,19 +12,24 @@
 
 #include "../include/cub3d.h"
 
+void	intit(t_data *data)
+{
+	data->flag = 0;
+	data->row_len = 0;
+	data->column_len = 0;
+	data->x = 0;
+	data->y = 0;
+	data->map->c = 0;
+	data->map->f = 0;
+	data->flag_v1 = 0;
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
 
-	data.flag = 0;
-	data.row_len = 0;
-	data.column_len = 0;
-	data.x = 0;
-	data.y = 0;
+	init(&data);
 	data.map = ft_malloc(sizeof(t_map));
-	data.map->c = 0;
-	data.map->f = 0;
-	data.flag_v1 = 0;
 	if (ac != 2 || ft_read_map(av[1], data.map))
 	{
 		printf("Error\n");
