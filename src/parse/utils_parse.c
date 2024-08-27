@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 04:36:13 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/26 15:35:13 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 11:39:36 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	chpath(char *file, char *ex)
 	int	res;
 
 	res = -2;
-	if (!strcmp(ft_strrchr(file, '.'), ex))
+	if (!ft_strcmp(ft_strrchr(file, '.'), ex))
 	{
 		fd = open(file, O_RDONLY);
 		res = ((fd < 0) * fd + !(fd < 0) * 0);

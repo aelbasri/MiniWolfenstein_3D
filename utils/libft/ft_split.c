@@ -12,8 +12,6 @@
 
 #include "libft.h"
 
-
-
 static int	count_word(char *s, char c)
 {
 	int	i;
@@ -61,15 +59,16 @@ char	**ft_split(char *s, char c)
 {
 	char			**arr;
 	unsigned int	len_words;
-	t_list *head = ft_return();
+	t_list			*head;
+
+	head = ft_return();
 	if (!s)
 		return (0);
 	len_words = count_word(s, c);
 	arr = (char **)malloc(sizeof(char *) * (len_words + 1));
-	ft_lstadd_back( &head , ft_lstnew(arr));
-	
+	ft_lstadd_back(&head, ft_lstnew(arr));
 	if (!arr)
 		return (0);
 	arr = mini_split(s, c, arr, len_words);
-	return ( arr);
+	return (arr);
 }

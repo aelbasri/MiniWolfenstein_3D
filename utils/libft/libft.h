@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 11:38:49 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/26 16:57:28 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 11:33:28 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_list
 }					t_list;
 
 
-#include "/nfs/homes/abquaoub/Desktop/last_version/include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int					ft_atoi(const char *theString);
 void				ft_bzero(void *dst, size_t n);
