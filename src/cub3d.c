@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:49:29 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/26 23:29:03 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 14:55:49 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ int	main(int ac, char **av)
 	init(&data);
 	data.map = ft_malloc(sizeof(t_map));
 	if (ac != 2 || ft_read_map(av[1], data.map))
-	{
-		printf("Error\n");
-		return (ft_free() , 2);
-	}
+		return (ft_putstr_fd("Error\n", 2), ft_free(), 2);
 	init(&data);
 	data.img->img = mlx_new_image(data.mlx, data.wi, data.hi);
 	data.img->addr = mlx_get_data_addr(data.img->img, \

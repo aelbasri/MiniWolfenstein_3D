@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 11:38:49 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/27 11:33:28 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:09:51 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,13 @@
 # include <string.h>
 # include <unistd.h>
 
-
-
 typedef struct s_list
 {
-	char **path;
+	char			**path;
 	void			*content;
-	int color;
+	int				color;
 	struct s_list	*next;
 }					t_list;
-
-
-#include "../../include/cub3d.h"
 
 int					ft_atoi(const char *theString);
 void				ft_bzero(void *dst, size_t n);
@@ -48,7 +43,7 @@ int					ft_memcmp(const void *pointer1, const void *pointer2,
 void				*ft_memmove(void *dest, const void *src, size_t n);
 void				*ft_memset(void *pointer, int value, size_t count);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
-int 				ft_strchr(const char *s, int c);
+int					ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *source);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
@@ -66,7 +61,7 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char *s, int fd);
 char				**ft_split(char *str, char c);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
-char				*ft_strjoin(char  *s1, char  *s2);
+char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
@@ -78,5 +73,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 t_list				*ft_lstnew(void *content);
 int					ft_lstsize(t_list *lst);
+void				*ft_malloc(size_t n);
+t_list				*ft_return(void);
 
 #endif
