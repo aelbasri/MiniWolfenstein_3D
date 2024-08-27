@@ -12,8 +12,6 @@
 
 #include "../include/cub3d.h"
 
-
-
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -24,8 +22,8 @@ int	main(int ac, char **av)
 	data.x = 0;
 	data.y = 0;
 	data.map = ft_malloc(sizeof(t_map));
-	data.map->C = 0;
-	data.map->F = 0;
+	data.map->c = 0;
+	data.map->f = 0;
 	if (ac != 2 || ft_read_map(av[1], data.map))
 	{
 		printf("Error\n");
@@ -37,8 +35,7 @@ int	main(int ac, char **av)
 	&(data.img->bits_per_pixel), &(data.img->line_length), &(data.img->endian));
 	setup_testures(&data);
 	ft_setup(&data);
-    mlx_mouse_get_pos(data.mlx  ,data.win , &data.x , &data.y);
-
+	mlx_mouse_get_pos(data.mlx, data.win, &data.x, &data.y);
 	mlx_hook(data.win, 2, 1L << 0, &update_player, &data);
 	mlx_loop_hook(data.mlx, draw_map, &data);
 	mlx_loop(data.mlx);

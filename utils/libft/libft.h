@@ -31,7 +31,7 @@ typedef struct s_list
 }					t_list;
 
 
-#include "/nfs/homes/abquaoub/Desktop/last_version/include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int					ft_atoi(const char *theString);
 void				ft_bzero(void *dst, size_t n);

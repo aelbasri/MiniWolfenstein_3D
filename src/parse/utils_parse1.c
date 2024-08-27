@@ -73,9 +73,9 @@ int	ft_check_char(char *str, t_map *map)
 	}
 	tr = ft_strtrim(str, " ");
 	if (count == 3)
-		ft_check_num(tr, &map->C, &count);
+		ft_check_num(tr, &map->c, &count);
 	else
-		ft_check_num(tr, &map->F, &count);
+		ft_check_num(tr, &map->f, &count);
 	return (count);
 }
 

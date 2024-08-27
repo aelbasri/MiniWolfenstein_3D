@@ -48,8 +48,8 @@ void	open_door(t_data *data)
 
 void	ft_exit(t_data *data)
 {
-	t_ray *ray;
-	t_ray *tmp;
+	t_ray	*ray;
+	t_ray	*tmp;
 	int		i;
 
 	ray = data->ray;
@@ -61,7 +61,7 @@ void	ft_exit(t_data *data)
 	}
 	data->ray = NULL;
 	i = 0;
-	while(i < 6)
+	while (i < 6)
 		mlx_destroy_image(data->mlx, data->walls[i++].img);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_image(data->mlx, data->img->img);

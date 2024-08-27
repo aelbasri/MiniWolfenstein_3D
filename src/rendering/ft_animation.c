@@ -79,7 +79,7 @@ void	ft_sprit(t_data *data)
 	static int	i;
 	int			counter;
 
-	counter = (i >= 4 && i <= 22) * 5 + !(i >= 4 && i <= 22) * 8;
+	counter = (i >= 4 && i <= 22) * 3 + !(i >= 4 && i <= 22) * 6;
 	j++;
 	j = (j == counter && i++) * 0 + !(j == counter) * j;
 	ft_render_img(data, &data->animation[i]);
