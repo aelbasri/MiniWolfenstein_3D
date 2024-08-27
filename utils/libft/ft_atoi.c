@@ -17,11 +17,12 @@ int	ft_atoi(const char *theString)
 	int	s;
 	int	res;
 	int	i;
+
 	s = 1;
 	res = 0;
 	i = 0;
-	if(!theString )
-		return ( -22);
+	if (!theString)
+		return (-22);
 	while (theString[i] == ' ' || (theString[i] >= 9 && theString[i] <= 13))
 		i++;
 	if (theString[i] == '-' || theString[i] == '+')

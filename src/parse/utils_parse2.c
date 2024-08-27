@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:39:15 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/26 16:20:57 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 11:42:56 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,12 @@ void	ft_free(void)
 		head = node;
 		i++;
 	}
+}
+
+int ft_strcmp(char *s1 , char *s2)
+{
+	int i = 0;
+	while(s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

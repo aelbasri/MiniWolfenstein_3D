@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelbasri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:46:40 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/23 12:46:43 by aelbasri         ###   ########.fr       */
+/*   Updated: 2024/08/26 23:21:50 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	normalize(double *angle)
 int	init_player(t_data *data, char angle, int x, int y)
 {
 	data->player = malloc(sizeof(t_player));
-	data->player->angle = ((angle == 'W') * W) + ((angle == 'E') * E) + \
-	((angle == 'S') * S) + ((angle == 'N') * N);
+	data->player->angle = ((angle == 'W') * W) + ((angle == 'E') * E)
+		+ ((angle == 'S') * S) + ((angle == 'N') * N);
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
 	data->movement_flag = 0;
@@ -63,13 +63,14 @@ void	ft_exit(t_data *data)
 	i = 0;
 	while (i < 6)
 		mlx_destroy_image(data->mlx, data->walls[i++].img);
+	i = 0;
+	while (i < 31)
+		mlx_destroy_image(data->mlx, data->animation[i++].img);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_image(data->mlx, data->img->img);
 	mlx_destroy_display(data->mlx);
-	free(data->map);
-	free(data->img);
-	free(data->mlx);
-	free(data->player);
+	(free(data->img), free(data->mlx), free(data->player));
+	ft_free();
 	exit(1);
 }
 

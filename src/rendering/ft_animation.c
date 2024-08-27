@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:39:59 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/26 16:00:18 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/26 23:28:36 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,17 @@ void	ft_setup(t_data *data)
 	int		i;
 	char	*join;
 
-	data->animation = ft_malloc(sizeof(t_img) * (29));
+	data->animation = ft_malloc(sizeof(t_img) * (31));
 	x = 0;
 	y = 0;
 	i = 0;
-	while (i < 29)
+	while (i < 31)
 	{
 		join = ft_strjoin("./utils/bb/", ft_itoa(i + 1));
 		join = ft_strjoin(join, ".xpm");
 		data->animation[i].img = mlx_xpm_file_to_image(data->mlx, join, &x, &y);
 		if (!data->animation[i].img)
-		{
-			ft_free();
-			exit(0);
-		}
+			ft_exit(data);
 		data->animation[i].addr = mlx_get_data_addr(data->animation[i].img,
 				&(data->animation[i].bits_per_pixel),
 				&(data->animation[i].line_length),
@@ -79,12 +76,12 @@ void	ft_sprit(t_data *data)
 	static int	i;
 	int			counter;
 
-	counter = (i >= 4 && i <= 22) * 3 + !(i >= 4 && i <= 22) * 6;
+	counter = (i >= 4 && i <= 22) * 2 + !(i >= 4 && i <= 22) * 8;
 	j++;
 	j = (j == counter && i++) * 0 + !(j == counter) * j;
 	ft_render_img(data, &data->animation[i]);
 	if (data->flag_v1)
-		i = (i >= 28) * 22 + !(i >= 28) * i;
+		i = (i >= 30) * 22 + !(i >= 30) * i;
 	else
 		i = !(i >= 4) * i;
 }

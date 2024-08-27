@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 04:37:09 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/26 17:13:35 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 11:39:44 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_check_int(char *str, int i, int *color, int *count)
 		}
 		child[1] = ft_return_num(child[1]);
 		n = ft_atoi(child[1]);
-		*count += (ft_len_v1(child) != 2 || strcmp(ft_itoa(n), child[1])
+		*count += (ft_len_v1(child) != 2 || ft_strcmp(ft_itoa(n), child[1])
 				|| n > 255);
 		*color += n << 16;
 	}
@@ -36,7 +36,7 @@ void	ft_check_int(char *str, int i, int *color, int *count)
 		str = ft_strtrim(ft_return_num(str), " ");
 		n = ft_atoi(str);
 		*color += (i == 1) * (n << 8) + (i != 1) * n;
-		*count += (n > 255 || strcmp(ft_itoa(n), str)) * 1;
+		*count += (n > 255 || ft_strcmp(ft_itoa(n), str)) * 1;
 	}
 }
 
@@ -86,21 +86,21 @@ int	ft_path(char *str, t_map *map)
 
 	count = 0;
 	ss = ft_split(str, ' ');
-	if (!ss[1])
+	if (ft_len_v1(ss) != 2 || !ss[1])
 		return (-20);
-	if (!strcmp(ss[0], "NO") && !chpath(ss[1], ".xpm") && ++count)
+	if (!ft_strcmp(ss[0], "NO") && !chpath(ss[1], ".xpm") && ++count)
 		map->no = ft_strdup(ss[1]);
-	else if (!strcmp(ss[0], "SO") && !chpath(ss[1], ".xpm"))
+	else if (!ft_strcmp(ss[0], "SO") && !chpath(ss[1], ".xpm"))
 	{
 		count += 2;
 		map->so = ft_strdup(ss[1]);
 	}
-	else if (!strcmp(ss[0], "WE") && !chpath(ss[1], ".xpm"))
+	else if (!ft_strcmp(ss[0], "WE") && !chpath(ss[1], ".xpm"))
 	{
 		count += 3;
 		map->we = ft_strdup(ss[1]);
 	}
-	else if (!strcmp(ss[0], "EA") && !chpath(ss[1], ".xpm"))
+	else if (!ft_strcmp(ss[0], "EA") && !chpath(ss[1], ".xpm"))
 	{
 		count += 4;
 		map->ea = ft_strdup(ss[1]);
