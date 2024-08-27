@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:01:31 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/26 15:23:07 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 12:11:57 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	draw_map(t_data *data)
 	mini_map(data);
 	ft_sprit(data);
 
-	 mlx_mouse_get_pos(data->mlx  ,data->win , &x , &y);
+	mlx_mouse_get_pos(data->mlx  ,data->win , &x , &y);
     data->player->angle = data->player->angle + (-(data->x - x) * (M_PI / 180));
     mlx_mouse_get_pos(data->mlx  ,data->win , &data->x , &data->y);
 

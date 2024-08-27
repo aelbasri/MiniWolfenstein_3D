@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 08:29:59 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024/08/26 23:27:32 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 12:07:36 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	mini_map(t_data *data)
 	double	x;
 	double	y;
 
-	x = (data->player->px) / S_WALL;
-	y = (data->player->py) / S_WALL;
+	x = (data->player->px) / T_SIZE;
+	y = (data->player->py) / T_SIZE;
 	i = ft_strlen(&data->map->map[(int)y][(int)x]);
 	j = ft_len_v1(data->map->map) - (int)y;
 	i = !(x - MINI_X / 2 < 0) * (x - MINI_X / 2) - (i < MINI_X / 2) * (MINI_X

@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define S_WALL 32
+# define S_WALL 256
 
 # include "../utils/libft/libft.h"
 # include "../utils/minilibx-linux/mlx.h"
