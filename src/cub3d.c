@@ -28,8 +28,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	init(&data);
 	data.map = ft_malloc(sizeof(t_map));
+	intit(&data);
 	if (ac != 2 || ft_read_map(av[1], data.map))
 		return (ft_putstr_fd("Error\n", 2), ft_free(), 2);
 	init(&data);
