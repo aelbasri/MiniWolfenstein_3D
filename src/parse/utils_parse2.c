@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:39:15 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/27 11:42:56 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:07:31 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,6 @@ char	*ft_return_num(char *num)
 		i++;
 	}
 	return (num);
-}
-
-t_list	*ft_return(void)
-{
-	static t_list	head;
-
-	return (&head);
-}
-
-void	*ft_malloc(size_t num)
-{
-	t_list	*head;
-	void	*add;
-
-	head = ft_return();
-	add = malloc(num);
-	ft_lstadd_back(&head, ft_lstnew(add));
-	return (add);
 }
 
 void	ft_free(void)

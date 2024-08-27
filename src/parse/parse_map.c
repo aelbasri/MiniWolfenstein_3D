@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 09:39:22 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024/08/26 22:23:14 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:18:06 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,7 @@ int	ft_read_map(char *file, t_map *map)
 	join = ft_utils_read(join, map, &count);
 	map->map = ft_convertt(join, map);
 	count += ft_parse_map(map->map);
+	if (!map->no || !map->so || !map->ea || !map->we)
+		count += 100;
 	return ((count != 17) * 1);
 }

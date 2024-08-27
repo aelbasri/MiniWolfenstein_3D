@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:32:29 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/27 14:48:53 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:07:55 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,6 @@ char				*get_next_line(char *file);
 char				*ft_join(char *str, int max);
 int					chpath(char *file, char *ex);
 int					ft_len_v1(char **str);
-t_list				*ft_return(void);
-void				*ft_malloc(size_t num);
 void				ft_free(void);
 char				*ft_return_num(char *num);
 int					ft_strcmp(char *s1, char *s2);

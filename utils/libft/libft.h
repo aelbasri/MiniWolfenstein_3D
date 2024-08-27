@@ -6,14 +6,13 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 11:38:49 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/27 14:56:49 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:09:51 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include "../../include/cub3d.h"
 # include <stddef.h>
 # include <stdint.h>
 # include <stdio.h>
@@ -74,5 +73,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 t_list				*ft_lstnew(void *content);
 int					ft_lstsize(t_list *lst);
+void				*ft_malloc(size_t n);
+t_list				*ft_return(void);
 
 #endif

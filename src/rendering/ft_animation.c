@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:39:59 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/27 14:53:35 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:19:25 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_sprit(t_data *data)
 	int			counter;
 	static int	flag = 1;
 
-	counter = (i >= 4 && i <= 22) * 3 + !(i >= 4 && i <= 22) * 9;
+	counter = (i >= 4 && i <= 22) * 3 + !(i >= 4 && i <= 22) * 8;
 	j++;
 	if (j == counter)
 	{
