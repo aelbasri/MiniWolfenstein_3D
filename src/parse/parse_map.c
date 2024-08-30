@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 09:39:22 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024/08/27 19:18:06 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/30 20:04:14 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,19 @@ char	*ft_utils_read(char *str, t_map *map, int *count)
 	int		i;
 	char	**rd_file;
 	char	*join;
+	int		flag;
 
+	flag = 0;
 	i = 0;
 	rd_file = ft_split(str, '\n');
 	join = NULL;
 	while (rd_file && rd_file[i])
 	{
-		if (ft_strchr(rd_file[i], '.'))
+		if (!ft_strtrim(rd_file[i], "1 ")[0])
+			flag = 1;
+		if (ft_strchr(rd_file[i], '.') && !flag)
 			*count += ft_path(rd_file[i], map);
-		else if (ft_strchr(rd_file[i], ','))
+		else if (ft_strchr(rd_file[i], ',') && !flag)
 			*count += ft_check_char(rd_file[i], map);
 		else
 			join = ft_strjoin(join, rd_file[i]);
