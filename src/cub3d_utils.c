@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:46:40 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/26 23:21:50 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:18:02 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	open_door(t_data *data)
 		data->map->map[(int)(y / T_SIZE)][(int)(x / T_SIZE)] = '2';
 }
 
-void	ft_exit(t_data *data)
+int	ft_exit( t_data *data)
 {
 	t_ray	*ray;
 	t_ray	*tmp;
@@ -72,6 +72,7 @@ void	ft_exit(t_data *data)
 	(free(data->img), free(data->mlx), free(data->player));
 	ft_free();
 	exit(1);
+	return (1);
 }
 
 void	init(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:32:29 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/27 19:07:55 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:18:18 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ int					draw_map(t_data *data);
 void				normalize(double *angle);
 int					init_player(t_data *data, char angle, int x, int y);
 void				open_door(t_data *data);
-void				ft_exit(t_data *data);
+int					ft_exit(t_data *data);
 void				init(t_data *data);
 void				move_2(t_data *data);
 void				move_1(t_data *data);

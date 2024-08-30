@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:49:29 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/27 14:55:49 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/08/30 21:16:38 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	main(int ac, char **av)
 	setup_testures(&data);
 	ft_setup(&data);
 	mlx_mouse_get_pos(data.mlx, data.win, &data.x, &data.y);
-	mlx_hook(data.win, 2, 1L << 0, &update_player, &data);
+	mlx_hook(data.win, 2, 1L << 0, update_player, &data);
+	mlx_hook(data.win, 17, 1L << 0, ft_exit, &data);
 	mlx_loop_hook(data.mlx, draw_map, &data);
 	mlx_loop(data.mlx);
 }
