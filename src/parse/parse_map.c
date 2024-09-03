@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 09:39:22 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024/09/03 12:44:03 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:55:41 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_pos(char *str, t_map *map, int j)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_strchr("NOSE", str[i]))
+		if (ft_strchr("NWSE", str[i]))
 		{
 			map->x = i + 1;
 			map->y = j + 1;

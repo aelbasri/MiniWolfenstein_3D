@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 04:37:09 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/09/03 12:47:50 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:56:10 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ int	check_space(char **map, int i, int j)
 	}
 	else
 	{
-		map[i][j] = (ft_strchr("NOSE", c) * '0' + !ft_strchr("NOSE", c) * c);
-		count += ft_strchr("NOSE", c) + !ft_strchr("NOSE 0123", c) * 200;
+		map[i][j] = (ft_strchr("NWSE", c) * '0' + !ft_strchr("NWSE", c) * c);
+		count += ft_strchr("NWSE", c) + !ft_strchr("NWSE 0123", c) * 200;
 	}
 	return (count);
 }
