@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:32:29 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/08/30 21:18:18 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:00:25 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ int					ft_path(char *str, t_map *map);
 int					ft_check_char(char *str, t_map *map);
 void				ft_check_num(char *num, int *color, int *count);
 int					check_space(char **map, int i, int j);
-char				*get_next_line(char *file);
+char				*get_next_line(int file);
 char				*ft_join(char *str, int max);
 int					chpath(char *file, char *ex);
 int					ft_len_v1(char **str);

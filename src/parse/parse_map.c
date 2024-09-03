@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 09:39:22 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024/08/30 20:04:14 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:44:03 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,29 +81,29 @@ char	**ft_convertt(char *str, t_map *map)
 	return (ss);
 }
 
-char	*ft_utils_read(char *str, t_map *map, int *count)
+char	*ft_utils_read(char *file, t_map *map, int *count)
 {
-	int		i;
-	char	**rd_file;
+	char	*rd_file;
 	char	*join;
 	int		flag;
+	int		fd;
 
+	fd = open(file, O_RDONLY);
 	flag = 0;
-	i = 0;
-	rd_file = ft_split(str, '\n');
+	rd_file = get_next_line(fd);
 	join = NULL;
-	while (rd_file && rd_file[i])
+	while (rd_file)
 	{
-		if (!ft_strtrim(rd_file[i], "1 ")[0])
+		if (rd_file[0] != '\n' && ft_strtrim(rd_file, "1 ")[0] == '\n')
 			flag = 1;
-		if (ft_strchr(rd_file[i], '.') && !flag)
-			*count += ft_path(rd_file[i], map);
-		else if (ft_strchr(rd_file[i], ',') && !flag)
-			*count += ft_check_char(rd_file[i], map);
+		if (ft_strchr(rd_file, '.') && !flag)
+			*count += ft_path(rd_file, map);
+		else if (ft_strchr(rd_file, ',') && !flag)
+			*count += ft_check_char(rd_file, map);
 		else
-			join = ft_strjoin(join, rd_file[i]);
-		join = ft_strjoin(join, "\n");
-		i++;
+			join = ft_strjoin(join, rd_file);
+		*count += (rd_file[0] == '\n' && flag) * 200;
+		rd_file = get_next_line(fd);
 	}
 	return (join);
 }
@@ -116,10 +116,7 @@ int	ft_read_map(char *file, t_map *map)
 	count = 0;
 	if (chpath(file, ".cub"))
 		return (1);
-	join = get_next_line(file);
-	if (!join)
-		return (1);
-	join = ft_utils_read(join, map, &count);
+	join = ft_utils_read(file, map, &count);
 	map->map = ft_convertt(join, map);
 	count += ft_parse_map(map->map);
 	if (!map->no || !map->so || !map->ea || !map->we)

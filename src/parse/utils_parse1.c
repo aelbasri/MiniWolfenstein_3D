@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 04:37:09 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/30 20:05:23 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:47:50 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ int	ft_check_char(char *str, t_map *map)
 
 	i = 0;
 	count = 0;
+	str = ft_strtrim(str, "\n");
 	while (str[i])
 	{
 		if (!ft_strchr("0123456789 ,CF", str[i]))
-			count++;
+			count += 200;
 		if (ft_strchr("C,", str[i]) || (str[i] == 'F' && ++count))
 			count++;
 		i++;
@@ -85,9 +86,9 @@ int	ft_path(char *str, t_map *map)
 	int		count;
 
 	count = 0;
-	ss = ft_split(str, ' ');
+	ss = ft_split(ft_strtrim(str, "\n"), ' ');
 	if (ft_len_v1(ss) != 2 || !ss[1])
-		return (-20);
+		return (200);
 	if (!ft_strcmp(ss[0], "NO") && !chpath(ss[1], ".xpm") && ++count)
 		map->no = ft_strdup(ss[1]);
 	else if (!ft_strcmp(ss[0], "SO") && !chpath(ss[1], ".xpm"))
@@ -122,7 +123,7 @@ int	check_space(char **map, int i, int j)
 					map[i - 1][j]))))
 		count++;
 	else if (!j || !map[i][j + 1] || !i || !map[i + 1])
-		count += (!ft_strchr("1 ", c) * 4);
+		count += !ft_strchr("1 ", c) * 200;
 	else if (c == '2' || c == '3')
 	{
 		n = map[i][j + 1] - 48;
@@ -132,7 +133,7 @@ int	check_space(char **map, int i, int j)
 	else
 	{
 		map[i][j] = (ft_strchr("NOSE", c) * '0' + !ft_strchr("NOSE", c) * c);
-		count += ft_strchr("NOSE", c) + !ft_strchr("NOSE 0123", c);
+		count += ft_strchr("NOSE", c) + !ft_strchr("NOSE 0123", c) * 200;
 	}
 	return (count);
 }

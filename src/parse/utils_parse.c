@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 04:36:13 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/08/27 11:39:36 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:16:50 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,23 @@ int	chpath(char *file, char *ex)
 	return (res);
 }
 
-char	*get_next_line(char *file)
+char	*get_next_line(int fd)
 {
 	char	*buff;
 	char	*data;
-	int		fd;
+	int		rd;
 
 	buff = ft_malloc(2);
 	data = NULL;
-	fd = open(file, O_RDONLY);
 	while (1)
 	{
-		if (!read(fd, buff, 1))
+		rd = read(fd, buff, 1);
+		if (!rd)
 			break ;
 		buff[1] = 0;
 		data = ft_strjoin(data, buff);
+		if (buff[0] == '\n')
+			break ;
 	}
-	return (close(fd), data);
+	return (data);
 }
