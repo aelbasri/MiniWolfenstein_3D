@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:32:29 by aelbasri          #+#    #+#             */
-/*   Updated: 2024/09/03 12:00:25 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:55:48 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void				ft_sprit(t_data *data);
 int					ft_path(char *str, t_map *map);
 int					ft_check_char(char *str, t_map *map);
 void				ft_check_num(char *num, int *color, int *count);
-int					check_space(char **map, int i, int j);
+void	check_space(char **map, int i, int j , int *count);
 char				*get_next_line(int file);
 char				*ft_join(char *str, int max);
 int					chpath(char *file, char *ex);

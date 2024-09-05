@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 04:37:09 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/09/03 13:56:10 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:55:31 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,31 +109,29 @@ int	ft_path(char *str, t_map *map)
 	return (count);
 }
 
-int	check_space(char **map, int i, int j)
+void	check_space(char **map, int i, int j, int *count)
 {
-	int		count;
 	char	c;
 	int		n;
 
-	count = 0;
 	c = map[i][j];
 	if (c == ' ' && !((!map[i][j] || ft_strchr("1 ", map[i][j + 1])) && (!j
 				|| ft_strchr("1 ", map[i][j - 1])) && (!map[i + 1]
 				|| ft_strchr("1 ", map[i + 1][j])) && (!i || ft_strchr("1 ",
 					map[i - 1][j]))))
-		count++;
+		*count += 200;
 	else if (!j || !map[i][j + 1] || !i || !map[i + 1])
-		count += !ft_strchr("1 ", c) * 200;
+		*count += !ft_strchr("1 ", c) * 200;
 	else if (c == '2' || c == '3')
 	{
 		n = map[i][j + 1] - 48;
-		count -= !((map[i][j + 1] == (48 + n) && map[i][j - 1] == (48 + n))
-				&& (map[i + 1][j] == (48 + !n) && map[i - 1][j] == (48 + !n)));
+		*count += !((map[i][j + 1] == (48 + n) && map[i][j - 1] == (48 + n))
+				&& (map[i + 1][j] == (48 + !n) && map[i - 1][j] == (48 + !n)))
+			* 20;
 	}
 	else
 	{
 		map[i][j] = (ft_strchr("NWSE", c) * '0' + !ft_strchr("NWSE", c) * c);
-		count += ft_strchr("NWSE", c) + !ft_strchr("NWSE 0123", c) * 200;
+		*count += ft_strchr("NWSE", c) + !ft_strchr("NWSE 0123", c) * 200;
 	}
-	return (count);
 }

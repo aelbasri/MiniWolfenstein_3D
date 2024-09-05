@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 09:39:22 by abdelbassat       #+#    #+#             */
-/*   Updated: 2024/09/03 13:55:41 by abquaoub         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:55:54 by abquaoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_parse_map(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			count += check_space(map, i, j);
+			check_space(map, i, j, &count);
 			j++;
 		}
 		i++;
