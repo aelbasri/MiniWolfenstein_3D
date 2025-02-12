@@ -3,7 +3,7 @@
 ## Description
 This project is part of the 42 Network curriculum, focusing on creating a simple 3D game using ray-casting techniques. The game engine is built from scratch using minimal external libraries, demonstrating core graphics programming concepts.
 
-[!Watch the demo video](./utils/assets/demo.mp4)
+![Watch the demo video](https://github.com/aelbasri/MiniWolfenstein_3D/blob/main/utils/assets/demo.gif)
 
 ## Prerequisites
 - GCC/Clang compiler
