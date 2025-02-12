@@ -6,7 +6,7 @@
 /*   By: abquaoub <abquaoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 04:36:13 by abquaoub          #+#    #+#             */
-/*   Updated: 2024/09/03 12:16:50 by abquaoub         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:00:29 by aelbasri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ char	*ft_join(char *str, int max)
 {
 	int		i;
 	char	*arr;
-	int		len;
 
 	i = 0;
-	len = ft_strlen(str);
 	arr = ft_malloc(sizeof(char *) * (max + 1));
 	while (str[i])
 	{
